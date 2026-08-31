@@ -220,7 +220,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   <div class="wrap">
     <a class="lock" href="https://lobang-scout.github.io/"><svg viewBox="2 0.2 23.8 28.8" width="18.2" height="22.0" aria-hidden="true" focusable="false" fill="var(--brand)" fill-rule="evenodd" style="flex:none;display:block"><path d="M2 2.6h10.4v26.4h-10.4z M12.4 9h7.6v20h-7.6zM5.2 0.2h4.2v2.4h-4.2zM3.20 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM7.40 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM11.60 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM15.80 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM20.00 18.80L25.80 20.42L25.80 22.62L20.00 21.00zM22.70 22.01h1.80V29.0h-1.80zM3.40 4.8h3.30v1.7h-3.30z M7.70 4.8h3.30v1.7h-3.30zM3.40 8.5h3.30v1.7h-3.30z M7.70 8.5h3.30v1.7h-3.30zM3.40 12.2h3.30v1.7h-3.30z M7.70 12.2h3.30v1.7h-3.30zM3.40 15.9h3.30v1.7h-3.30z M7.70 15.9h3.30v1.7h-3.30zM13.50 11.2h2.20v1.7h-2.20z M16.70 11.2h2.20v1.7h-2.20zM13.50 14.9h2.20v1.7h-2.20z M16.70 14.9h2.20v1.7h-2.20z"/></svg><span class="wm">Lobang&nbsp;Scout</span></a>
     <h1>Can Claude run a Singapore SME's back office?</h1>
-    <div class="sub">Plain Claude · the small-business plugin · Claude + MCP connectors · vs. what SMEs already use — an evidence brief</div>
+    <div class="sub">Plain Claude · the small-business plugin · Claude + MCP connectors · vs. what SMEs already use: an evidence brief</div>
     <div class="sub" style="margin-top:.5rem;opacity:.8"><b>Dated evidence, not advice.</b> Runs are from Jun–Jul 2026. Product capabilities and Singapore grant schemes change; grant support in particular is mid-transition through 2026. Verify current scheme terms at the source before you budget anything. Nothing here is tax advice.</div>
     <nav>
       <button data-tab="start" class="active">① Start here</button>
@@ -236,23 +236,23 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 <!-- ===================== TAB 1: START HERE ===================== -->
 <section class="tab active" id="start">
   <div class="hero">
-    <div class="one">I tested whether an AI assistant (Claude) can do the financial back-office work of a small Singapore business. On a mid-2026 re-run the answer shifted: the model now gets the <b>tax knowledge right on its own</b> — but it still <span class="hi">fabricates forecast precision, over-promises to customers, and can't file.</span> Use it for thinking, guard the behaviour, keep Xero for filing.</div>
+    <div class="one">I tested whether an AI assistant (Claude) can do the financial back-office work of a small Singapore business. On a mid-2026 re-run the answer shifted: the model now gets the <b>tax knowledge right on its own</b>, but it still <span class="hi">fabricates forecast precision, over-promises to customers, and can't file.</span> Use it for thinking, guard the behaviour, keep Xero for filing.</div>
   </div>
 
-  <h2>What this is — in one minute</h2>
-  <p>A Singapore SME owner has a few recurring chores: work out cash flow, reply to customers, and — if GST-registered — file the quarterly <b>GST F5</b> tax return. AI tools promise to help. I put four realistic setups head-to-head on the same tasks, using <b>5 made-up (but realistic) Singapore businesses</b> — a bubble-tea shop, a minimart, an aircon trades firm, a design studio, and a bookkeeping back office.</p>
-  <p>I ran <b>~280 graded runs</b> across four rounds (quality, GST safety, cash-flow/drafting safety, and a live connector probe — see "What was tested" below), then <b>re-ran the safety rounds in July 2026 on a newer model</b> to see what had changed. Every answer was produced by Claude Sonnet and independently graded by Claude Opus. All the business data is synthetic and Singapore-localised (SGD, GST 9%, PayNow, WhatsApp) — no real company data. <b>The headline moved between the two runs</b> — that shift is itself the main finding (③).</p>
+  <h2>What this is, in one minute</h2>
+  <p>A Singapore SME owner has a few recurring chores: work out cash flow, reply to customers, and, if GST-registered, file the quarterly <b>GST F5</b> tax return. AI tools promise to help. I put four realistic setups head-to-head on the same tasks, using <b>5 made-up (but realistic) Singapore businesses</b>: a bubble-tea shop, a minimart, an aircon trades firm, a design studio, and a bookkeeping back office.</p>
+  <p>I ran <b>~280 graded runs</b> across four rounds (quality, GST safety, cash-flow/drafting safety, and a live connector probe, see "What was tested" below), then <b>re-ran the safety rounds in July 2026 on a newer model</b> to see what had changed. Every answer was produced by Claude Sonnet and independently graded by Claude Opus. All the business data is synthetic and Singapore-localised (SGD, GST 9%, PayNow, WhatsApp). No real company data. <b>The headline moved between the two runs</b>, and that shift is itself the main finding (③).</p>
   <p style="font-size:13px;color:var(--mute)"><b>How to read this:</b> ① context (here) → ② the framework (three layers) → ③ the evidence (the runs) → ④ tool-by-tool (what an AI connector can actually reach).</p>
 
   <h3>The four setups compared</h3>
   <div class="gloss">
-    <div class="term"><b>① Claude — plain</b><span>Just the chat. You paste a CSV or message thread and ask. No add-ons.</span></div>
+    <div class="term"><b>① Claude: plain</b><span>Just the chat. You paste a CSV or message thread and ask. No add-ons.</span></div>
     <div class="term"><b>② Claude + small-business plugin</b><span>Anthropic's "small-business" plugin: ~31 ready-made workflow guides + a bundle of ~12 app connectors.</span></div>
     <div class="term"><b>③ Claude + MCP connectors</b><span>Claude wired directly to the tools the business already uses (e.g. the official Xero connector) so it can read live data.</span></div>
     <div class="term"><b>④ What SG SMEs use now</b><span>The status quo: accounting software (Xero/QuickBooks) + an accountant + the government's myTax Portal for filing.</span></div>
   </div>
 
-  <h3>What was tested — every combination</h3>
+  <h3>What was tested: every combination</h3>
   <div class="scroll">
   <table style="min-width:760px">
     <thead><tr><th>Round</th><th>Question</th><th>Setups compared</th><th>Workflows</th><th>Runs</th></tr></thead>
@@ -269,11 +269,11 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   <h3>Plain-language glossary</h3>
   <div class="gloss">
     <div class="term"><b>GST F5</b><span>The quarterly Goods &amp; Services Tax return a GST-registered SG business files with the tax authority. GST is 9% (since 1 Jan 2024).</span></div>
-    <div class="term"><b>IRAS</b><span>Inland Revenue Authority of Singapore — the tax authority you file the F5 to.</span></div>
+    <div class="term"><b>IRAS</b><span>Inland Revenue Authority of Singapore, the tax authority you file the F5 to.</span></div>
     <div class="term"><b>myTax Portal</b><span>IRAS's website where returns are actually submitted. You log in and either key the figures or let approved software send them.</span></div>
-    <div class="term"><b>CorpPass</b><span>The government login that authorises a business to transact with IRAS/ACRA. The reason AI can't just "file" — there's a human-authorisation gate.</span></div>
+    <div class="term"><b>CorpPass</b><span>The government login that authorises a business to transact with IRAS/ACRA. The reason AI can't just "file": there's a human-authorisation gate.</span></div>
     <div class="term"><b>ASR+ (Approved Software Register Plus)</b><span>IRAS's list of software allowed to file the F5 <i>directly</i>, one-click. Xero is on it; most others only prepare the figures.</span></div>
-    <div class="term"><b>MCP (connector)</b><span>A standard "plug" that lets an AI read/act in another app (e.g. Xero, Gmail). It's generic — it has no country; it inherits whatever the connected account is set to.</span></div>
+    <div class="term"><b>MCP (connector)</b><span>A standard "plug" that lets an AI read/act in another app (e.g. Xero, Gmail). It's generic: it has no country; it inherits whatever the connected account is set to.</span></div>
     <div class="term"><b>The "small-business plugin"</b><span>Anthropic's pre-built pack of SME workflow guides + app connectors. Built around a US/QuickBooks process.</span></div>
     <div class="term"><b>Xero / QuickBooks</b><span>Cloud accounting software. Xero is the most widely used among SG SMEs (industry consensus) and can file the F5 directly; QuickBooks trails locally and only prepares it.</span></div>
     <div class="term"><b>SG guardrail script</b><span>A short prompt/recipe I wrote that enforces SG tax rules ("verify the total", "don't claim import GST without the permit"). Works on plain Claude.</span></div>
@@ -281,33 +281,33 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   </div>
 
   <div class="callout good" style="margin-top:24px">
-    <h3><span class="tag">bottom line</span> It's not one tool — it's a combination, and it moves over time</h3>
-    <p style="margin-bottom:0"><b>Keep the status quo (Xero) for the books &amp; filing</b> — only it produces a deterministic, audit-trailed number and files it to IRAS. <b>Add plain Claude for the thinking</b> — cash-flow questions, customer replies, what-ifs. <b>Add a thin SG guardrail for anything customer- or forecast-facing:</b> on the mid-2026 re-run Claude got GST <i>right</i> unguarded (the old catastrophic-underpay finding no longer reproduces — a knowledge gap the model closed by itself), yet it still <b>fabricated forecast confidence bands and over-promised refunds to customers in nearly every run</b> — behavioural flaws a thin guardrail eliminated. <b>Skip the small-business plugin for the books</b> — its 10 finance skills carry zero SG tax logic (I read them), it adds friction, and its US-shaped format was the <i>worst</i> offender on invented forecast precision. The pattern to remember: <b>knowledge gaps close with every model release; behavioural and structural gaps don't</b>.</p>
+    <h3><span class="tag">bottom line</span> It's not one tool, it's a combination, and it moves over time</h3>
+    <p style="margin-bottom:0"><b>Keep the status quo (Xero) for the books &amp; filing</b>: only it produces a deterministic, audit-trailed number and files it to IRAS. <b>Add plain Claude for the thinking</b>: cash-flow questions, customer replies, what-ifs. <b>Add a thin SG guardrail for anything customer- or forecast-facing:</b> on the mid-2026 re-run Claude got GST <i>right</i> unguarded (the old catastrophic-underpay finding no longer reproduces, a knowledge gap the model closed by itself), yet it still <b>fabricated forecast confidence bands and over-promised refunds to customers in nearly every run</b>, behavioural flaws a thin guardrail eliminated. <b>Skip the small-business plugin for the books</b>: its 10 finance skills carry zero SG tax logic (I read them), it adds friction, and its US-shaped format was the <i>worst</i> offender on invented forecast precision. The pattern to remember: <b>knowledge gaps close with every model release; behavioural and structural gaps don't</b>.</p>
   </div>
 </section>
 
 <!-- ===================== TAB 2: COMPARISON ===================== -->
 <section class="tab" id="compare">
-  <h2>The comparison — <span class="em">three layers, not one tool</span></h2>
-  <p class="lede">The clearest way to see the difference: a setup is built from <b>three independent layers</b>. Most "tools" only change <i>one</i> layer. Below — first the building blocks (the intuition), then the detailed matrix (the verdict per front). The run-by-run rates behind these verdicts live in <b>③ What I found</b>.</p>
+  <h2>The comparison: <span class="em">three layers, not one tool</span></h2>
+  <p class="lede">The clearest way to see the difference: a setup is built from <b>three independent layers</b>. Most "tools" only change <i>one</i> layer. Below, first the building blocks (the intuition), then the detailed matrix (the verdict per front). The run-by-run rates behind these verdicts live in <b>③ What I found</b>.</p>
 
   <!-- ---- A. building blocks ---- -->
   <h3>A. The building blocks</h3>
-  <p style="max-width:840px">Claude's intelligence is the constant — and it <i>improves over time</i> (the mid-2026 re-run in ③ shows the tax-knowledge gap closing on its own). Everything else is a choice in one of three layers. <b>An MCP connector upgrades the <span style="color:var(--good-ink)">Data</span> layer; the small-business plugin's US format <span style="color:var(--weak-ink)">downgrades Processing</span> (fabricated precision + friction); an SG guardrail <span style="color:var(--good-ink)">upgrades Processing</span> (bans invented precision &amp; over-commitment).</b> No AI option clears the Filing gate.</p>
+  <p style="max-width:840px">Claude's intelligence is the constant, and it <i>improves over time</i> (the mid-2026 re-run in ③ shows the tax-knowledge gap closing on its own). Everything else is a choice in one of three layers. <b>An MCP connector upgrades the <span style="color:var(--good-ink)">Data</span> layer; the small-business plugin's US format <span style="color:var(--weak-ink)">downgrades Processing</span> (fabricated precision + friction); an SG guardrail <span style="color:var(--good-ink)">upgrades Processing</span> (bans invented precision &amp; over-commitment).</b> No AI option clears the Filing gate.</p>
 
   <div class="stack">
     <div class="layer">
       <div class="lname">Intelligence<small>the constant</small></div>
-      <div class="opts"><span class="chip n">Claude — already knows SG GST 9%, IRAS, SGD <small>same in every setup; a skill adds no knowledge it lacks</small></span></div>
+      <div class="opts"><span class="chip n">Claude: already knows SG GST 9%, IRAS, SGD <small>same in every setup; a skill adds no knowledge it lacks</small></span></div>
     </div>
     <div class="plus">+</div>
     <div class="layer">
       <div class="lname">① Data<small>where numbers come from</small></div>
       <div class="opts">
         <span class="chip n">Paste CSV <small>manual</small></span>
-        <span class="chip g">MCP auto-pull <small>SG via account config ✓ — but only tools that <b>have</b> a connector</small></span>
+        <span class="chip g">MCP auto-pull <small>SG via account config ✓, but only tools that <b>have</b> a connector</small></span>
         <span class="chip g">Native (in the SaaS)</span>
-        <span class="chip w">SG-local tools (PayNow · WhatsApp · IRAS) <small>✗ no connector exists — MCP literally cannot reach these</small></span>
+        <span class="chip w">SG-local tools (PayNow · WhatsApp · IRAS) <small>✗ no connector exists: MCP literally cannot reach these</small></span>
       </div>
     </div>
     <div class="plus">+</div>
@@ -316,7 +316,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
       <div class="opts">
         <span class="chip g">Claude's own knowledge ✓ <small>now gets SG GST right unguarded (re-run)</small></span>
         <span class="chip w">US plugin format ✗ <small>fabricates forecast bands (4/4 runs) + friction; model overrides its US tax text</small></span>
-        <span class="chip g">SG guardrail ✓✓ <small>bans invented precision &amp; over-commitment — safest</small></span>
+        <span class="chip g">SG guardrail ✓✓ <small>bans invented precision &amp; over-commitment, safest</small></span>
       </div>
     </div>
     <div class="plus">+</div>
@@ -340,8 +340,8 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <div class="callout bad">
     <h3><span class="tag">your question</span> "What if we run the plugin <i>with</i> MCP? Doesn't account config fix it?"</h3>
-    <p style="margin-bottom:6px"><b>The data gets fixed — the format doesn't.</b> An MCP on an SG Xero org pulls SG data via account config (SGD, GST 9%) <i>even under the plugin</i>. At the current model Claude also handles the SG <i>tax</i> correctly under the plugin — the old "US process overrides SG knowledge" harm has faded (see the re-run in ③).</p>
-    <p style="margin-bottom:0">But the plugin's <b>output format</b> is the live problem: it fabricates forecast confidence bands in <i>every</i> cash-flow run (4/4 — see ③), now dressed on authoritative-looking live data. <b>The fix isn't a connector — it's the Processing block:</b> drop the plugin, use Claude's own knowledge + a thin SG guardrail that bans invented precision and unauthorised commitments. That you <i>can</i> change; the missing local connectors and the CorpPass filing gate you can't.</p>
+    <p style="margin-bottom:6px"><b>The data gets fixed. The format doesn't.</b> An MCP on an SG Xero org pulls SG data via account config (SGD, GST 9%) <i>even under the plugin</i>. At the current model Claude also handles the SG <i>tax</i> correctly under the plugin: the old "US process overrides SG knowledge" harm has faded (see the re-run in ③).</p>
+    <p style="margin-bottom:0">But the plugin's <b>output format</b> is the live problem: it fabricates forecast confidence bands in <i>every</i> cash-flow run (4/4, see ③), now dressed on authoritative-looking live data. <b>The fix isn't a connector, it's the Processing block:</b> drop the plugin, use Claude's own knowledge + a thin SG guardrail that bans invented precision and unauthorised commitments. That you <i>can</i> change; the missing local connectors and the CorpPass filing gate you can't.</p>
   </div>
 
   <!-- ---- B. matrix ---- -->
@@ -370,7 +370,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
       </tr>
     </thead>
     <tbody>
-      <tr class="band"><td colspan="6">① Data — where the numbers come from</td></tr>
+      <tr class="band"><td colspan="6">① Data: where the numbers come from</td></tr>
       <tr>
         <td class="rowlab">Auto-pull vs paste</td>
         <td class="cell weak"><span class="g">✗</span> paste CSV by hand</td>
@@ -396,7 +396,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
         <td class="cell good"><span class="g">✓</span> used natively in the apps</td>
       </tr>
 
-      <tr class="band"><td colspan="6">② Processing — how GST is handled</td></tr>
+      <tr class="band"><td colspan="6">② Processing: how GST is handled</td></tr>
       <tr>
         <td class="rowlab">SG tax logic</td>
         <td class="cell good"><span class="g">✓</span> Claude knows it (confirmed on re-run)</td>
@@ -416,9 +416,9 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
       <tr>
         <td class="rowlab">Behavioural safety <small>no invented precision / over-commit</small></td>
         <td class="cell weak"><span class="g">✗</span> over-commits 4/4 on replies</td>
-        <td class="cell weak"><span class="g">⚠</span> worst — bands 4/4 + over-commits 4/4</td>
+        <td class="cell weak"><span class="g">⚠</span> worst: bands 4/4 + over-commits 4/4</td>
         <td class="cell weak"><span class="g">✗</span> same model behaviour (no guardrail)</td>
-        <td class="cell good"><span class="g">✓</span> 0/4 both — guardrail eliminates</td>
+        <td class="cell good"><span class="g">✓</span> 0/4 both, guardrail eliminates</td>
         <td class="cell good"><span class="g">✓</span> deterministic outputs</td>
       </tr>
       <tr>
@@ -438,7 +438,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
         <td class="cell weak"><span class="g">✗</span> rigid (JAX/Assist emerging)</td>
       </tr>
 
-      <tr class="band"><td colspan="6">③ Filing — submit to IRAS</td></tr>
+      <tr class="band"><td colspan="6">③ Filing: submit to IRAS</td></tr>
       <tr>
         <td class="rowlab" style="background:var(--weak-bg)">File GST F5 → IRAS</td>
         <td class="cell weak"><span class="g">✗</span> can't file</td>
@@ -460,29 +460,29 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
       <tr class="verdict">
         <td class="rowlab">Best role</td>
         <td class="cell good">Thinking layer</td>
-        <td class="cell weak">Skip — downgrades process</td>
+        <td class="cell weak">Skip: downgrades process</td>
         <td class="cell good">Thinking + live reads</td>
         <td class="cell good">Safest Claude config for SG tax</td>
-        <td class="cell good">Books &amp; filing — keep</td>
+        <td class="cell good">Books &amp; filing: keep</td>
       </tr>
     </tbody>
   </table>
   </div>
-  <p style="font-size:11.5px;color:var(--mute)">The "★ + SG script" column is <b>directly measured</b> (plain Claude + the SG script, no plugin — see the safety benchmark on the results tab); it matches plugin+script, confirming the plugin adds nothing. The "+ MCP" <b>connector/data layer is now confirmed live</b> (a Singapore Xero org returned SGD + GST 9% from config; 68 invoices pulled live; no filing endpoint — see results tab) — only the reasoning-over-MCP <i>quality</i> rows remain inferred from the non-MCP runs.</p>
+  <p style="font-size:11.5px;color:var(--mute)">The "★ + SG script" column is <b>directly measured</b> (plain Claude + the SG script, no plugin, see the safety benchmark on the results tab); it matches plugin+script, confirming the plugin adds nothing. The "+ MCP" <b>connector/data layer is now confirmed live</b> (a Singapore Xero org returned SGD + GST 9% from config; 68 invoices pulled live; no filing endpoint, see results tab). Only the reasoning-over-MCP <i>quality</i> rows remain inferred from the non-MCP runs.</p>
 
   <!-- ---- C. pros & cons per combination ---- -->
   <h3>C. Pros &amp; cons of each combination</h3>
-  <p style="max-width:840px">The matrix above distilled into a "should I use this?" card per setup — each line grounded in the measured runs (③).</p>
+  <p style="max-width:840px">The matrix above distilled into a "should I use this?" card per setup, each line grounded in the measured runs (③).</p>
   <div class="pcgrid">
     <div class="pc good">
       <h4>① Plain Claude</h4>
       <ul>
         <li class="p">Near-zero setup, free/cheap (≈S$0–28/mo, USD-billed)</li>
         <li class="p">Best engine for analysis &amp; drafting (top quality score, 4.70, prior-model run)</li>
-        <li class="p">Gets SG GST right unguarded — confirmed on the mid-2026 re-run</li>
+        <li class="p">Gets SG GST right unguarded, confirmed on the mid-2026 re-run</li>
         <li class="c">You paste data by hand</li>
         <li class="c">Unguarded: over-commits to customers <b>4/4</b> (promises refunds); can't file</li>
-        <li class="c">GST-correct <i>today</i> is a moving target, not a guarantee — re-check per model</li>
+        <li class="c">GST-correct <i>today</i> is a moving target, not a guarantee, so re-check per model</li>
       </ul>
       <div class="use"><b>Use for:</b> the thinking layer, with a careful prompt. Not for unguarded statutory work.</div>
     </div>
@@ -490,77 +490,77 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     <div class="pc bad">
       <h4>② + small-business plugin <span class="v skip">skip</span></h4>
       <ul>
-        <li class="p">Bundles connectors (data plumbing) — if you run those US apps</li>
-        <li class="c"><b>All 10 finance skills</b> carry zero SG tax logic (read directly — no GST/IRAS/CPF)</li>
-        <li class="c">Fabricates cash-flow confidence bands <b>4/4</b> — structural to its format, not a model gap</li>
-        <li class="c">Its "approval gate" didn't reach the customer reply — still over-committed <b>4/4</b></li>
+        <li class="p">Bundles connectors (data plumbing), if you run those US apps</li>
+        <li class="c"><b>All 10 finance skills</b> carry zero SG tax logic (read directly: no GST/IRAS/CPF)</li>
+        <li class="c">Fabricates cash-flow confidence bands <b>4/4</b>, structural to its format, not a model gap</li>
+        <li class="c">Its "approval gate" didn't reach the customer reply, still over-committed <b>4/4</b></li>
         <li class="c">Last on quality (3.69, prior-model run); install + connector friction</li>
       </ul>
-      <div class="use"><b>Use for:</b> skip for the books / statutory / replies (tested &amp; failed). Its ~18 marketing/CRM/ops skills are <i>untested</i> — possibly useful, but lean on the same US connectors.</div>
+      <div class="use"><b>Use for:</b> skip for the books / statutory / replies (tested &amp; failed). Its ~18 marketing/CRM/ops skills are <i>untested</i>: possibly useful, but lean on the same US connectors.</div>
     </div>
 
     <div class="pc good">
       <h4>③ + MCP connector <span class="v" style="background:var(--mute)">live-tested</span></h4>
       <ul>
         <li class="p">Live auto-pull; <b>inherits SG config</b> (confirmed: SGD + GST 9%)</li>
-        <li class="p">Keeps Claude's SG knowledge — good for live-ledger reasoning</li>
+        <li class="p">Keeps Claude's SG knowledge, good for live-ledger reasoning</li>
         <li class="c">Still can't file the F5 (no endpoint in the connector)</li>
-        <li class="c">No guardrail by itself — same behavioural risk (over-commit / invented precision)</li>
+        <li class="c">No guardrail by itself, so the same behavioural risk (over-commit / invented precision)</li>
         <li class="c"><b>Plugin + MCP = fabricated bands on authoritative-looking live data</b></li>
       </ul>
-      <div class="use"><b>Use for:</b> reasoning over live data — best paired with the SG script.</div>
+      <div class="use"><b>Use for:</b> reasoning over live data, best paired with the SG script.</div>
     </div>
 
     <div class="pc rec">
       <h4>★ + SG guardrail script <span class="v rec2">best Claude</span></h4>
       <ul>
         <li class="p">Invented forecast bands <b>4/4 → 0/4</b>; over-commitment <b>4/4 → 0/4</b></li>
-        <li class="p">The durable win: fixes behaviour the base model doesn't — unlike tax, which it now gets on its own</li>
+        <li class="p">The durable win: fixes behaviour the base model doesn't, unlike tax, which it now gets on its own</li>
         <li class="p">Near-zero setup (paste a recipe); works with or without plugin/MCP</li>
-        <li class="c">Still an LLM — not <i>guaranteed</i>; can't file the F5</li>
+        <li class="c">Still an LLM, so not <i>guaranteed</i>; can't file the F5</li>
       </ul>
-      <div class="use"><b>Use for:</b> the safe everyday Claude config for SG — the cheapest high-leverage fix.</div>
+      <div class="use"><b>Use for:</b> the safe everyday Claude config for SG, the cheapest high-leverage fix.</div>
     </div>
 
     <div class="pc good">
-      <h4>④ Status quo — Xero <span class="v keep" style="margin-left:4px">keep</span></h4>
+      <h4>④ Status quo: Xero <span class="v keep" style="margin-left:4px">keep</span></h4>
       <ul>
         <li class="p">Deterministic, audit-trailed; <b>files the F5 to IRAS</b> (ASR+)</li>
         <li class="p">Native SG GST framework (reverse charge, Customer Accounting, IGDS)</li>
-        <li class="p">Grant support has applied historically — check the current scheme before budgeting</li>
+        <li class="p">Grant support has applied historically, so check the current scheme before budgeting</li>
         <li class="c">Subscription + setup/learning curve (S$39–95/mo)</li>
         <li class="c">Rigid for ad-hoc analysis &amp; drafting (JAX emerging)</li>
       </ul>
-      <div class="use"><b>Use for:</b> the books &amp; statutory filing — keep it; run Claude beside it for the thinking.</div>
+      <div class="use"><b>Use for:</b> the books &amp; statutory filing: keep it, and run Claude beside it for the thinking.</div>
     </div>
   </div>
 </section>
 
 <!-- ===================== TAB 3: RESULTS ===================== -->
 <section class="tab" id="results">
-  <h2>What I found — <span class="em">the actual run results</span></h2>
-  <p class="lede">The most important result is <b>a change over time</b>. The June 2026 benchmark found unguarded Claude underpaid GST catastrophically. When I <b>re-ran the same tests in July on a newer model</b>, that failure had <i>vanished</i> — but two behavioural failures (fabricated forecast precision, over-promising to customers) <i>persisted</i>. That split — knowledge gaps closing while behavioural gaps stay — is the headline. Everything generated by Claude Sonnet, judged by Claude Opus (never self-graded).</p>
+  <h2>What I found: <span class="em">the actual run results</span></h2>
+  <p class="lede">The most important result is <b>a change over time</b>. The June 2026 benchmark found unguarded Claude underpaid GST catastrophically. When I <b>re-ran the same tests in July on a newer model</b>, that failure had <i>vanished</i>, but two behavioural failures (fabricated forecast precision, over-promising to customers) <i>persisted</i>. That split, knowledge gaps closing while behavioural gaps stay, is the headline. Everything generated by Claude Sonnet, judged by Claude Opus (never self-graded).</p>
 
   <div class="callout blue">
-    <h3><span class="tag">the headline</span> What changed between two model versions — and what didn't</h3>
+    <h3><span class="tag">the headline</span> What changed between two model versions, and what didn't</h3>
     <p style="margin-bottom:10px">Same tests, same synthetic data, two model versions ~two months apart. The failures that were about <b>knowledge</b> closed on their own; the ones about <b>behaviour</b> and <b>plumbing</b> did not.</p>
     <div class="scroll">
     <table style="min-width:720px">
       <thead><tr><th>Failure mode</th><th>Jun 2026<br><small>prior model</small></th><th>Jul 2026<br><small>current model</small></th><th>Trajectory</th></tr></thead>
       <tbody>
-        <tr><td><b>Catastrophic GST underpay</b> <small>(importer, unguarded)</small></td><td class="cell weak">plain 40% · plugin 60%</td><td class="cell good"><b>0 / 13</b></td><td class="cell">▼ <b>Closing</b> — a knowledge gap; shrinks each model release</td></tr>
-        <tr><td><b>Invented forecast bands</b> <small>(cash-flow, plugin)</small></td><td class="cell weak">89%</td><td class="cell weak"><b>4 / 4</b></td><td class="cell">▬ <b>Persistent</b> — baked into the plugin's format, not knowledge</td></tr>
-        <tr><td><b>Over-commit to customers</b> <small>(complaints, unguarded)</small></td><td class="cell weak">83%</td><td class="cell weak"><b>8 / 8</b></td><td class="cell">▬ <b>Persistent</b> — a behaviour, not knowledge</td></tr>
-        <tr><td><b>Thin SG guardrail fixes the two above</b></td><td class="cell good">→ 17% / 25%</td><td class="cell good"><b>→ 0 / 4</b></td><td class="cell">✓ <b>Durable</b> — the guardrail earns its keep on behaviour</td></tr>
-        <tr><td><b>No SG connectors · can't file IRAS</b></td><td class="cell weak">gap</td><td class="cell weak">gap</td><td class="cell">▬ <b>Structural</b> — unchanged until someone builds them</td></tr>
+        <tr><td><b>Catastrophic GST underpay</b> <small>(importer, unguarded)</small></td><td class="cell weak">plain 40% · plugin 60%</td><td class="cell good"><b>0 / 13</b></td><td class="cell">▼ <b>Closing</b>: a knowledge gap, shrinks each model release</td></tr>
+        <tr><td><b>Invented forecast bands</b> <small>(cash-flow, plugin)</small></td><td class="cell weak">89%</td><td class="cell weak"><b>4 / 4</b></td><td class="cell">▬ <b>Persistent</b>: baked into the plugin's format, not knowledge</td></tr>
+        <tr><td><b>Over-commit to customers</b> <small>(complaints, unguarded)</small></td><td class="cell weak">83%</td><td class="cell weak"><b>8 / 8</b></td><td class="cell">▬ <b>Persistent</b>: a behaviour, not knowledge</td></tr>
+        <tr><td><b>Thin SG guardrail fixes the two above</b></td><td class="cell good">→ 17% / 25%</td><td class="cell good"><b>→ 0 / 4</b></td><td class="cell">✓ <b>Durable</b>: the guardrail earns its keep on behaviour</td></tr>
+        <tr><td><b>No SG connectors · can't file IRAS</b></td><td class="cell weak">gap</td><td class="cell weak">gap</td><td class="cell">▬ <b>Structural</b>: unchanged until someone builds them</td></tr>
       </tbody>
     </table>
     </div>
-    <p style="margin-bottom:0;font-size:12.5px"><b>The takeaway that won't go stale:</b> don't buy a tool for what the base model will soon do anyway (tax knowledge). Buy <b>guardrails</b> for behaviour and <b>connectors</b> for reach — and <b>re-run this yourself</b> on whatever model you're on, because the top row keeps moving.</p>
+    <p style="margin-bottom:0;font-size:12.5px"><b>The takeaway that won't go stale:</b> don't buy a tool for what the base model will soon do anyway (tax knowledge). Buy <b>guardrails</b> for behaviour and <b>connectors</b> for reach, and <b>re-run this yourself</b> on whatever model you're on, because the top row keeps moving.</p>
   </div>
 
-  <h3>The GST safety story — a June finding that reversed in July</h3>
-  <p style="max-width:860px">The realistic case is a non-expert owner who just asks <i>"help me settle my GST."</i> In <b>June 2026</b> I ran that exact naive close <b>10 times per setup, on 2 GST businesses</b> — a design <b>studio</b> and an <b>importer</b> (back-office with overseas bills) — free-form, <b>no safety hints</b>, independently judged against the true tax figures. Unguarded Claude underpaid <i>every</i> time; the plugin was worst. <b>Those June rates (prior model):</b></p>
+  <h3>The GST safety story: a June finding that reversed in July</h3>
+  <p style="max-width:860px">The realistic case is a non-expert owner who just asks <i>"help me settle my GST."</i> In <b>June 2026</b> I ran that exact naive close <b>10 times per setup, on 2 GST businesses</b>, a design <b>studio</b> and an <b>importer</b> (back-office with overseas bills), free-form, <b>no safety hints</b>, independently judged against the true tax figures. Unguarded Claude underpaid <i>every</i> time; the plugin was worst. <b>Those June rates (prior model):</b></p>
 
   <div class="scroll">
   <table style="min-width:720px">
@@ -582,17 +582,17 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <div class="callout bad">
     <h3><span class="tag">the reversal</span> Re-run in July, the catastrophic GST error was gone</h3>
-    <p style="margin-bottom:6px">I re-ran the naive importer close on the <b>current model</b>. The blatant import-GST trap — claiming GST off overseas invoices without a Customs permit — fired <b>0 times in 13 unguarded runs</b> (7 plain + 6 plugin). The plugin was no longer worse than plain; both produced essentially the correct net GST (~S$17,6xx). <b>The June "guardrails are the whole game" claim for tax no longer holds</b> — the model closed that knowledge gap on its own.</p>
-    <p style="margin-bottom:0"><b>But the guardrail didn't stop earning its keep — its value moved</b> from tax knowledge to <i>behaviour</i>: fabricated forecast precision and over-commitment, which did <b>not</b> improve (next section). Knowledge was the part the model could outgrow; behaviour isn't.</p>
+    <p style="margin-bottom:6px">I re-ran the naive importer close on the <b>current model</b>. The blatant import-GST trap, claiming GST off overseas invoices without a Customs permit, fired <b>0 times in 13 unguarded runs</b> (7 plain + 6 plugin). The plugin was no longer worse than plain; both produced essentially the correct net GST (~S$17,6xx). <b>The June "guardrails are the whole game" claim for tax no longer holds</b>: the model closed that knowledge gap on its own.</p>
+    <p style="margin-bottom:0"><b>But the guardrail didn't stop earning its keep: its value moved</b> from tax knowledge to <i>behaviour</i>: fabricated forecast precision and over-commitment, which did <b>not</b> improve (next section). Knowledge was the part the model could outgrow; behaviour isn't.</p>
   </div>
 
   <div class="callout warn">
     <h3><span class="tag">method honesty</span> Why these are the numbers I trust</h3>
-    <p style="margin-bottom:0">I also ran a <b>primed</b> version (the other 80 runs) where each run was asked "did you claim import GST off invoices?" — and it scored <b>0% errors almost everywhere</b>. Asking the question made the model careful and suppressed the very mistake. That 0%-vs-100% gap is itself a finding: <b>how you prompt dominates the result</b>. A real owner never asks themselves the safety question — so the free-form rates above are the honest ones.</p>
+    <p style="margin-bottom:0">I also ran a <b>primed</b> version (the other 80 runs) where each run was asked "did you claim import GST off invoices?", and it scored <b>0% errors almost everywhere</b>. Asking the question made the model careful and suppressed the very mistake. That 0%-vs-100% gap is itself a finding: <b>how you prompt dominates the result</b>. A real owner never asks themselves the safety question, so the free-form rates above are the honest ones.</p>
   </div>
 
-  <h3 style="margin-top:34px">Where the guardrail still earns its keep — behaviour (cash-flow &amp; drafting)</h3>
-  <p style="max-width:860px">These failures aren't about tax knowledge — they're about <i>behaviour</i>: inventing precision the data can't support, and promising things on the owner's behalf. <b>Unlike GST, they did not improve on the newer model.</b> Flaw rates, June → July re-run (July: free-form, n=4 per setup, independently judged):</p>
+  <h3 style="margin-top:34px">Where the guardrail still earns its keep: behaviour (cash-flow &amp; drafting)</h3>
+  <p style="max-width:860px">These failures aren't about tax knowledge, they're about <i>behaviour</i>: inventing precision the data can't support, and promising things on the owner's behalf. <b>Unlike GST, they did not improve on the newer model.</b> Flaw rates, June → July re-run (July: free-form, n=4 per setup, independently judged):</p>
   <div class="scroll">
   <table style="min-width:720px">
     <thead><tr><th>Setup</th><th>Cash-flow: invented confidence bands<br><small>Jun → Jul</small></th><th>Complaints: unauthorised commitment¹<br><small>Jun → Jul</small></th></tr></thead>
@@ -603,10 +603,10 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:11.5px;color:var(--mute)">¹ promised a refund / instalment / credit without gating to owner approval. <b>The plugin fabricates cash-flow confidence bands in every run</b> (4/4) — a format artefact (it emits default ±30% bands), not a knowledge gap the model can outgrow. Unguarded, Claude over-commits on the owner's behalf in <b>every</b> complaint run (plain and plugin, 8/8) — and the plugin's own "approval gate" note didn't stop it: the customer-facing reply still promised. The SG guardrail cut both to <b>0/4</b>. <b>This is the guardrail's durable value — behaviour, not tax.</b> (Lean re-run: n=4/setup, one persona each; effects are extreme so directionally solid.)</p>
+  <p style="font-size:11.5px;color:var(--mute)">¹ promised a refund / instalment / credit without gating to owner approval. <b>The plugin fabricates cash-flow confidence bands in every run</b> (4/4), a format artefact (it emits default ±30% bands), not a knowledge gap the model can outgrow. Unguarded, Claude over-commits on the owner's behalf in <b>every</b> complaint run (plain and plugin, 8/8), and the plugin's own "approval gate" note didn't stop it: the customer-facing reply still promised. The SG guardrail cut both to <b>0/4</b>. <b>This is the guardrail's durable value: behaviour, not tax.</b> (Lean re-run: n=4/setup, one persona each; effects are extreme so directionally solid.)</p>
 
-  <h3 style="margin-top:34px">Separately — output quality (28 expert-prompt runs, June prior-model)</h3>
-  <p style="max-width:860px;font-size:13.5px;color:var(--sub)">With a <b>well-written prompt that already carries the SG rules</b>, I also scored overall quality (not just safety) across analysis, drafting and GST. Different question, different condition — here plain Claude leads. <b>These scores are from the June prior-model run and were not re-scored</b> — treat as historical; the relative ordering is the durable part.</p>
+  <h3 style="margin-top:34px">Separately: output quality (28 expert-prompt runs, June prior-model)</h3>
+  <p style="max-width:860px;font-size:13.5px;color:var(--sub)">With a <b>well-written prompt that already carries the SG rules</b>, I also scored overall quality (not just safety) across analysis, drafting and GST. Different question, different condition, and here plain Claude leads. <b>These scores are from the June prior-model run and were not re-scored</b>, so treat as historical; the relative ordering is the durable part.</p>
   <div class="card">
     <div class="bars">
       <div class="bar"><span class="lab">L0 · Plain Claude</span><div class="track"><div class="fill" style="width:94%;background:var(--bar)">4.70</div></div></div>
@@ -614,7 +614,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
       <div class="bar"><span class="lab">L3 · Plugin + SG script</span><div class="track"><div class="fill" style="width:84.2%;background:var(--bar)">4.21</div></div></div>
       <div class="bar"><span class="lab">L2 · Small-business plugin</span><div class="track"><div class="fill" style="width:73.8%;background:var(--bar)">3.69</div></div></div>
     </div>
-    <p style="font-size:12.5px;color:var(--sub);margin:8px 0 0"><b>Plain Claude won outright.</b> The purpose-built plugin (L2) came <b>last</b> — its US-shaped guides added friction without quality. Adding the SG guardrail script (L3) rescued the plugin a lot, but still couldn't beat plain Claude — because the script's value isn't tied to the plugin.</p>
+    <p style="font-size:12.5px;color:var(--sub);margin:8px 0 0"><b>Plain Claude won outright.</b> The purpose-built plugin (L2) came <b>last</b>: its US-shaped guides added friction without quality. Adding the SG guardrail script (L3) rescued the plugin a lot, but still couldn't beat plain Claude, because the script's value isn't tied to the plugin.</p>
   </div>
 
   <h3>Score by workflow type</h3>
@@ -622,35 +622,35 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   <table style="min-width:680px">
     <thead><tr><th>Workflow</th><th>L0 plain</th><th>L1 generic</th><th>L2 plugin</th><th>L3 plugin + SG script</th></tr></thead>
     <tbody>
-      <tr><td><b>Analysis</b> — cash-flow snapshot</td><td class="good">4.72</td><td>4.28</td><td class="weak">4.02</td><td>4.28</td></tr>
-      <tr><td><b>Drafting</b> — customer complaints</td><td class="good">4.85</td><td>4.55</td><td class="weak">3.85</td><td>4.35</td></tr>
-      <tr><td><b>Statutory</b> — month-end + GST</td><td class="good">4.53</td><td>4.15</td><td class="weak">3.03</td><td>3.95</td></tr>
+      <tr><td><b>Analysis</b>: cash-flow snapshot</td><td class="good">4.72</td><td>4.28</td><td class="weak">4.02</td><td>4.28</td></tr>
+      <tr><td><b>Drafting</b>: customer complaints</td><td class="good">4.85</td><td>4.55</td><td class="weak">3.85</td><td>4.35</td></tr>
+      <tr><td><b>Statutory</b>: month-end + GST</td><td class="good">4.53</td><td>4.15</td><td class="weak">3.03</td><td>3.95</td></tr>
       <tr class="verdict"><td>average</td><td class="good">4.70</td><td>4.32</td><td class="weak">3.69</td><td>4.21</td></tr>
     </tbody>
   </table>
   </div>
-  <p style="font-size:12.5px;color:var(--sub)">Plain Claude (L0) was best in every category. <b>No contradiction with the safety rates above:</b> plain Claude is the strongest <i>engine</i> when the prompt already carries the rules (this quality test) — but on a <i>naive</i> prompt it has no guardrail to stop a confident underpayment. Best engine ≠ safe unguarded; that's exactly why the SG script matters.</p>
+  <p style="font-size:12.5px;color:var(--sub)">Plain Claude (L0) was best in every category. <b>No contradiction with the safety rates above:</b> plain Claude is the strongest <i>engine</i> when the prompt already carries the rules (this quality test), but on a <i>naive</i> prompt it has no guardrail to stop a confident underpayment. Best engine ≠ safe unguarded; that's exactly why the SG script matters.</p>
 
   <h3>So, do you need a "skill" or plugin?</h3>
   <div class="card">
-    <p style="margin-bottom:8px"><b>For an expert one-shot prompt:</b> no — plain Claude suffices.</p>
-    <p style="margin-bottom:8px"><b>For a non-expert SME:</b> yes — but for <i>behaviour</i>, not tax. A thin <b>SG guardrail</b> that bans invented precision and unauthorised commitments. The current model handles SG GST itself; the guardrail's job is to stop it fabricating forecast bands and over-promising to customers (both persisted on the re-run). Not the heavy US plugin — it fabricates bands the most. Cheap, high-leverage, available today on plain Claude.</p>
-    <p style="margin-bottom:0"><b>For the filed number:</b> still <b>buy Xero</b> — guardrail-Claude is safe and near-exact, but Xero gives a <i>guaranteed</i> figure filed straight to IRAS, with the audit trail. Claude reasons; Xero files.</p>
+    <p style="margin-bottom:8px"><b>For an expert one-shot prompt:</b> no, plain Claude suffices.</p>
+    <p style="margin-bottom:8px"><b>For a non-expert SME:</b> yes, but for <i>behaviour</i>, not tax. A thin <b>SG guardrail</b> that bans invented precision and unauthorised commitments. The current model handles SG GST itself; the guardrail's job is to stop it fabricating forecast bands and over-promising to customers (both persisted on the re-run). Not the heavy US plugin, which fabricates bands the most. Cheap, high-leverage, available today on plain Claude.</p>
+    <p style="margin-bottom:0"><b>For the filed number:</b> still <b>buy Xero</b>. Guardrail-Claude is safe and near-exact, but Xero gives a <i>guaranteed</i> figure filed straight to IRAS, with the audit trail. Claude reasons; Xero files.</p>
   </div>
 
   <div class="callout blue">
     <h3><span class="tag">evidence status</span> What's been run</h3>
     <ol class="steps" style="max-width:840px">
-      <li><b>✓ Done — safety-rate benchmark (160 runs).</b> The rates above come from 10 free-form runs per setup × 2 GST personas, judged by an independent model. It replaced the single-run figure with a real rate — and exposed how badly structured prompting can flatter a model (primed 0% vs free-form 100%).</li>
-      <li><b>✓ Done — SG-script config tested directly.</b> Plain Claude + the SG script (no plugin) was measured: 0% catastrophic, matching plugin+script — confirming the script, not the plugin, is the value.</li>
-      <li><b>✓ Done — live Xero sandbox probe.</b> Connected the Xero connector to a live <b>Singapore</b> org: it returned <b>SGD + GST 9%</b> (plus reverse-charge @9%, Customer Accounting, import/IGDS rates) purely from the org config — and <b>USD + Canadian rates</b> from a Global org, proving the connector inherits the account, not a country. It pulled 68 invoices live and exposed <b>no filing endpoint</b>. Reasoning-over-MCP <i>quality</i> is still inferred from the non-MCP runs.</li>
-      <li><b>✓ Done — July 2026 re-run on a newer model.</b> Re-ran the GST-safety, cash-flow and drafting rounds. Catastrophic GST error gone (0/13 unguarded); invented bands (plugin 4/4) and over-commitment (8/8) persisted; the SG guardrail still eliminated both (0/4). The knowledge gap closed; the behavioural gaps didn't.</li>
+      <li><b>✓ Done: safety-rate benchmark (160 runs).</b> The rates above come from 10 free-form runs per setup × 2 GST personas, judged by an independent model. It replaced the single-run figure with a real rate, and exposed how badly structured prompting can flatter a model (primed 0% vs free-form 100%).</li>
+      <li><b>✓ Done: SG-script config tested directly.</b> Plain Claude + the SG script (no plugin) was measured: 0% catastrophic, matching plugin+script, confirming the script, not the plugin, is the value.</li>
+      <li><b>✓ Done: live Xero sandbox probe.</b> Connected the Xero connector to a live <b>Singapore</b> org: it returned <b>SGD + GST 9%</b> (plus reverse-charge @9%, Customer Accounting, import/IGDS rates) purely from the org config, and <b>USD + Canadian rates</b> from a Global org, proving the connector inherits the account, not a country. It pulled 68 invoices live and exposed <b>no filing endpoint</b>. Reasoning-over-MCP <i>quality</i> is still inferred from the non-MCP runs.</li>
+      <li><b>✓ Done: July 2026 re-run on a newer model.</b> Re-ran the GST-safety, cash-flow and drafting rounds. Catastrophic GST error gone (0/13 unguarded); invented bands (plugin 4/4) and over-commitment (8/8) persisted; the SG guardrail still eliminated both (0/4). The knowledge gap closed; the behavioural gaps didn't.</li>
     </ol>
-    <p style="margin-bottom:0;font-size:12.5px;color:var(--sub)">Still directional: 1 GST workflow, 2 personas, lean re-run (n=4–13 per cell) — worth widening to more archetypes (F&amp;B / retail / trades) and a field test on a real consented SME's live Xero. And <b>re-running per model release</b>, since the knowledge-gap results keep moving.</p>
+    <p style="margin-bottom:0;font-size:12.5px;color:var(--sub)">Still directional: 1 GST workflow, 2 personas, lean re-run (n=4–13 per cell), worth widening to more archetypes (F&amp;B / retail / trades) and a field test on a real consented SME's live Xero. And <b>re-running per model release</b>, since the knowledge-gap results keep moving.</p>
   </div>
 
-  <h3 style="margin-top:34px">Coverage — what was tested vs reasoned</h3>
-  <p style="max-width:860px;font-size:13.5px;color:var(--sub)">Honesty check — I did <b>not</b> test every cell. This is the per-setup view of the four rounds in "What was tested" (tab ①): ✓ where measured, ◐ where reasoned / web-verified, ✗ where untested.</p>
+  <h3 style="margin-top:34px">Coverage: what was tested vs reasoned</h3>
+  <p style="max-width:860px;font-size:13.5px;color:var(--sub)">Honesty check: I did <b>not</b> test every cell. This is the per-setup view of the four rounds in "What was tested" (tab ①): ✓ where measured, ◐ where reasoned / web-verified, ✗ where untested.</p>
   <div class="scroll">
   <table style="min-width:780px">
     <thead><tr><th>Setup</th><th>Analysis</th><th>Drafting</th><th>Statutory</th><th>Safety rate<br><small>free-form</small></th><th>Live data (MCP)</th></tr></thead>
@@ -668,13 +668,13 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   </div>
   <p style="font-size:11px;color:var(--mute)">✓ measured · – not run (*inferable from plugin+script, which it matched on statutory) · ◐ reasoned / web-verified · ✗ untested. The live-data (MCP) <b>connector layer is now measured</b> (SG org → SGD + GST 9%, live pull, no filing), and <b>free-form safety rates now span cash-flow, drafting &amp; statutory</b>. Remaining gap: reasoning-over-MCP quality (analysis/drafting via live data).</p>
 
-  <p style="font-size:11.5px;color:var(--mute);margin-top:16px"><b>Method &amp; caveats:</b> Directional, not exhaustive — 5 synthetic (PDPA-safe) personas, 3 of 8 planned workflows. Runs: <b>28</b> expert quality (round 1) + <b>160</b> GST safety-benchmark (round 2, free-form & primed) + <b>90</b> cash-flow/drafting safety (round 3) + <b>6</b> preliminary naive ≈ 280 (Jun). Plus a <b>July 2026 re-run</b> on a newer Sonnet (~37 runs: importer GST ×13, cash-flow ×12, drafting ×12); the Jun→Jul comparison across model versions is the point, not a like-for-like control. Generated by Claude Sonnet, judged by Claude Opus (never the same model grading its own output). The "+ MCP" cells are reasoned from the measured layers + web-verified connector capabilities, not separately live-run. Connector facts verified May–Jun 2026. <b>Plugin scope:</b> the small-business plugin has <b>31 skills</b> — I <i>ran</i> 3 (one per archetype) and <i>read</i> all 10 finance skills (0 contain GST/IRAS/CPF); its ~18 CRM/marketing/ops/contract/hiring skills were not evaluated.</p>
+  <p style="font-size:11.5px;color:var(--mute);margin-top:16px"><b>Method &amp; caveats:</b> Directional, not exhaustive: 5 synthetic (PDPA-safe) personas, 3 of 8 planned workflows. Runs: <b>28</b> expert quality (round 1) + <b>160</b> GST safety-benchmark (round 2, free-form & primed) + <b>90</b> cash-flow/drafting safety (round 3) + <b>6</b> preliminary naive ≈ 280 (Jun). Plus a <b>July 2026 re-run</b> on a newer Sonnet (~37 runs: importer GST ×13, cash-flow ×12, drafting ×12); the Jun→Jul comparison across model versions is the point, not a like-for-like control. Generated by Claude Sonnet, judged by Claude Opus (never the same model grading its own output). The "+ MCP" cells are reasoned from the measured layers + web-verified connector capabilities, not separately live-run. Connector facts verified May–Jun 2026. <b>Plugin scope:</b> the small-business plugin has <b>31 skills</b>. I <i>ran</i> 3 (one per archetype) and <i>read</i> all 10 finance skills (0 contain GST/IRAS/CPF); its ~18 CRM/marketing/ops/contract/hiring skills were not evaluated.</p>
 </section>
 
 <!-- ===================== TAB 4: SURFACES ===================== -->
 <section class="tab" id="surfaces">
-  <h2>Tool-by-tool — <span class="em">which SG SME surfaces an AI can actually reach</span></h2>
-  <p class="lede">"Can Claude help with X?" depends on whether a connector (MCP) exists for the tool the SME uses, what that connector is allowed to do, and the CorpPass gate on government filing. Here's every surface a typical SG SME touches — the detail behind the <b>Data</b> layer in ② and the "+ MCP" column.</p>
+  <h2>Tool-by-tool: <span class="em">which SG SME surfaces an AI can actually reach</span></h2>
+  <p class="lede">"Can Claude help with X?" depends on whether a connector (MCP) exists for the tool the SME uses, what that connector is allowed to do, and the CorpPass gate on government filing. Here's every surface a typical SG SME touches, the detail behind the <b>Data</b> layer in ② and the "+ MCP" column.</p>
 
   <div class="legend">
     <span class="lg"><span class="dot" style="background:var(--good-bg);border:1px solid var(--good-ink)"></span> official connector</span>
@@ -688,29 +688,29 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     <thead><tr><th>Surface (what the SME does)</th><th>What SG SMEs use</th><th>Connector today?</th><th>What AI can do</th><th>Workaround now</th></tr></thead>
     <tbody>
       <tr><td class="rowlab">Accounting &amp; books</td><td>Xero (most common), QuickBooks, MYOB</td><td class="cell good"><span class="g">✓</span> Xero official · QBO sandbox <span class="pkg">📦 QBO</span></td><td class="cell">Read + post invoices, bills, ledger</td><td class="cell">Wire the Xero connector; reason in Claude</td></tr>
-      <tr><td class="rowlab" style="background:var(--weak-bg)">GST F5 filing</td><td>myTax Portal + CorpPass</td><td class="cell weak"><span class="g">✗</span> no IRAS connector</td><td class="cell">Prepare figures only — <b>can't file</b></td><td class="cell">Xero one-click (ASR+); or key into myTax; or tax agent</td></tr>
+      <tr><td class="rowlab" style="background:var(--weak-bg)">GST F5 filing</td><td>myTax Portal + CorpPass</td><td class="cell weak"><span class="g">✗</span> no IRAS connector</td><td class="cell">Prepare figures only, <b>can't file</b></td><td class="cell">Xero one-click (ASR+); or key into myTax; or tax agent</td></tr>
       <tr><td class="rowlab">Getting paid</td><td>PayNow · NETS · FAST (+ cards)</td><td class="cell weak"><span class="g">✗</span> rails none · Stripe/PayPal ✓ <span class="pkg">📦</span> · Square N/A in SG</td><td class="cell">Card/online payments &amp; refunds; not local rails</td><td class="cell">Local gateway (e.g. HitPay); reconcile in Xero</td></tr>
-      <tr><td class="rowlab">Customer comms</td><td>WhatsApp Business (top channel — industry est.)</td><td class="cell part"><span class="g">~</span> no official Meta one · third-party wrappers <span class="pkg">📦 Slack/Gmail</span></td><td class="cell">Read chats, draft replies</td><td class="cell">Third-party wrapper, or paste thread → Claude</td></tr>
-      <tr><td class="rowlab">Selling — marketplaces</td><td>Shopee · Lazada · Carousell</td><td class="cell weak"><span class="g">✗</span> no seller connector (scrapers only)</td><td class="cell">Read public listings only</td><td class="cell">Export seller-centre CSV → Claude</td></tr>
-      <tr><td class="rowlab">Delivery — F&amp;B</td><td>GrabFood · Foodpanda</td><td class="cell weak"><span class="g">✗</span> no merchant connector</td><td class="cell">—</td><td class="cell">Export from merchant portal → Claude</td></tr>
+      <tr><td class="rowlab">Customer comms</td><td>WhatsApp Business (top channel, industry est.)</td><td class="cell part"><span class="g">~</span> no official Meta one · third-party wrappers <span class="pkg">📦 Slack/Gmail</span></td><td class="cell">Read chats, draft replies</td><td class="cell">Third-party wrapper, or paste thread → Claude</td></tr>
+      <tr><td class="rowlab">Selling: marketplaces</td><td>Shopee · Lazada · Carousell</td><td class="cell weak"><span class="g">✗</span> no seller connector (scrapers only)</td><td class="cell">Read public listings only</td><td class="cell">Export seller-centre CSV → Claude</td></tr>
+      <tr><td class="rowlab">Delivery: F&amp;B</td><td>GrabFood · Foodpanda</td><td class="cell weak"><span class="g">✗</span> no merchant connector</td><td class="cell">–</td><td class="cell">Export from merchant portal → Claude</td></tr>
       <tr><td class="rowlab">Point of sale</td><td>StoreHub · Eats365</td><td class="cell part"><span class="g">~</span> StoreHub community · Eats365 none</td><td class="cell">Read sales / inventory</td><td class="cell">Community connector or API export</td></tr>
       <tr><td class="rowlab">Payroll / CPF</td><td>Talenox, local HRMS</td><td class="cell weak"><span class="g">✗</span> none</td><td class="cell">Payslip/CPF calc checks only</td><td class="cell">Software files CPF; Claude sense-checks</td></tr>
       <tr><td class="rowlab">Entity admin</td><td>ACRA / BizFile (CorpPass)</td><td class="cell part"><span class="g">~</span> read registry (open data) · no write</td><td class="cell">Look up companies / UEN / GST status</td><td class="cell">File in BizFile; Claude preps</td></tr>
-      <tr><td class="rowlab">Office / marketing</td><td>Canva · Google / M365 · Gmail</td><td class="cell good"><span class="g">✓</span> official <span class="pkg">📦 in plugin</span></td><td class="cell">Full — read + create</td><td class="cell">Use as-is — the clean fits</td></tr>
+      <tr><td class="rowlab">Office / marketing</td><td>Canva · Google / M365 · Gmail</td><td class="cell good"><span class="g">✓</span> official <span class="pkg">📦 in plugin</span></td><td class="cell">Full: read + create</td><td class="cell">Use as-is: the clean fits</td></tr>
     </tbody>
   </table>
   </div>
 
   <div class="callout warn">
     <h3><span class="tag">the real gap</span> The surfaces that define an SG SME's day have no connector</h3>
-    <p style="margin-bottom:0">Getting paid (<b>PayNow/NETS</b>), talking to customers (<b>WhatsApp Business</b>), selling (<b>Shopee/Grab</b>) and filing (<b>IRAS</b>) — the four things an SG SME does most — have <b>no usable AI connector today</b>, from the plugin or anywhere. The plugin bundles the office tools and US payment apps, which are the <i>least</i> SG-critical. An SG-shaped connector layer (IRAS, PayNow, WhatsApp Business, local POS/marketplaces) is the highest-leverage thing a programme could build.</p>
+    <p style="margin-bottom:0">Getting paid (<b>PayNow/NETS</b>), talking to customers (<b>WhatsApp Business</b>), selling (<b>Shopee/Grab</b>) and filing (<b>IRAS</b>), the four things an SG SME does most, have <b>no usable AI connector today</b>, from the plugin or anywhere. The plugin bundles the office tools and US payment apps, which are the <i>least</i> SG-critical. An SG-shaped connector layer (IRAS, PayNow, WhatsApp Business, local POS/marketplaces) is the highest-leverage thing a programme could build.</p>
   </div>
 </section>
 
 </main>
 
 <footer>
-  Evidence brief · ~280 graded runs (Jun 2026) + a July 2026 re-run on a newer model · 5 synthetic, PDPA-safe Singapore personas · generated by Claude Sonnet, judged by Claude Opus · connector capabilities live-probed + web-verified May–Jun 2026. All business data is synthetic. Not tax advice — confirm statutory figures with a qualified accountant or IRAS.
+  Evidence brief · ~280 graded runs (Jun 2026) + a July 2026 re-run on a newer model · 5 synthetic, PDPA-safe Singapore personas · generated by Claude Sonnet, judged by Claude Opus · connector capabilities live-probed + web-verified May–Jun 2026. All business data is synthetic. Not tax advice: confirm statutory figures with a qualified accountant or IRAS.
 </footer>
 
 <script>
