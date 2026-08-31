@@ -4,127 +4,231 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude for Singapore SMEs — plain vs plugin vs MCP vs status quo</title>
+<meta name="description" content="Can Claude run a Singapore SME's back office?
+ About 280 graded runs against five synthetic Singapore businesses, plus a July 2026 re-run that
+ retracted the headline. Free, no sign-up.">
+<meta name="theme-color" content="#a12915">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
-  :root{
-    --ink:#0f172a; --sub:#475569; --mute:#64748b; --line:#e2e8f0; --bg:#f1f5f9; --card:#fff;
-    --sg:#ee1c25;
-    --good-bg:#dcfce7; --good-ink:#15803d;
-    --part-bg:#fef3c7; --part-ink:#b45309;
-    --weak-bg:#fee2e2; --weak-ink:#b91c1c;
-    --info-bg:#e2e8f0; --info-ink:#475569;
+:root{
+  --brand:#a12915; --brand-hi:#8c2312; --ink:#16181a; --body:#3f4145; --mute:#75777b;
+  --bg:#faf9f7; --card:#ffffff; --line:#e4e2de; --soft:#f3f1ed; --code:#1c1e20;
+  --good-bg:#e2f3e6; --good-ink:#006f36;
+  --part-bg:#fbeccf; --part-ink:#845700;
+  --weak-bg:#efe7e4; --weak-ink:#534b47;
+  --info-bg:#f1efec; --info-ink:#5f6165;
+  --sub:var(--body);
+  --bar:#a12915;
+  --r-control:8px; --r-card:12px;
+  --ease-out:cubic-bezier(.2,.8,.3,1);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]){
+    --brand:#e2705a; --brand-hi:#efa08d; --ink:#f2f0ed; --body:#c9c6c1; --mute:#8e8b86;
+    --bg:#131415; --card:#1b1c1e; --line:#2c2e30; --soft:#202224; --code:#0e0f10;
+    --good-bg:#17301d; --good-ink:#53ae70;
+    --part-bg:#332714; --part-ink:#cd9135;
+    --weak-bg:#25211f; --weak-ink:#aba39e;
+    --info-bg:#212222; --info-ink:#9a9792;
+    --sub:var(--body);
+    --bar:#e2705a;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.55}
-  a{color:#1d4ed8}
+}
+@font-face{font-family:"Bricolage";src:url("Bricolage-400-800.woff2") format("woff2");
+  font-weight:400 800;font-display:swap}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--body);line-height:1.6;font-size:16px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  text-rendering:optimizeLegibility}
+a{color:var(--brand);text-underline-offset:3px}
+a:hover{color:var(--brand-hi)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:3px}
+h1,h2,h3,.wm{font-family:"Bricolage",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.16}
 
-  .top{background:#0f172a;color:#fff;border-top:5px solid var(--sg);position:sticky;top:0;z-index:50}
-  .top .wrap{max-width:1180px;margin:0 auto;padding:14px 22px}
-  .top h1{font-size:18px;font-weight:800;letter-spacing:-.01em}
-  .top .sub{font-size:12px;color:#94a3b8;margin-top:2px}
-  nav{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap}
-  nav button{background:transparent;border:none;color:#cbd5e1;font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px 8px 0 0;cursor:pointer;border-bottom:3px solid transparent}
-  nav button:hover{color:#fff;background:#1e293b}
-  nav button.active{background:var(--bg);color:var(--ink);border-bottom-color:var(--sg)}
+/* header */
+.top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.top .wrap{max-width:1180px;margin:0 auto;padding:14px 22px 0}
+.lock{display:flex;align-items:center;gap:7.5px;text-decoration:none;margin-bottom:12px;
+  min-height:44px;width:max-content}
+.wm{font-size:22px;line-height:1;color:var(--ink)}
+.top h1{font-size:clamp(19px,3.2vw,25px);margin-bottom:5px}
+.top .sub{font-size:14px;color:var(--mute);max-width:78ch}
+.top .sub b{color:var(--ink)}
+nav{display:flex;gap:2px;margin-top:14px;flex-wrap:wrap}
+nav button{background:transparent;border:0;color:var(--mute);font:600 14px inherit;
+  padding:11px 14px;min-height:44px;cursor:pointer;border-bottom:2px solid transparent;
+  border-radius:var(--r-control) var(--r-control) 0 0;
+  transition:color 120ms var(--ease-out),background 120ms var(--ease-out)}
+nav button:hover{color:var(--ink);background:var(--soft)}
+nav button.active{color:var(--brand);border-bottom-color:var(--brand)}
 
-  main{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
-  .tab{display:none}
-  .tab.active{display:block;animation:fade .2s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+main{max-width:1180px;margin:0 auto;padding:30px 22px 70px}
+.tab{display:none}
+.tab.active{display:block;animation:fade .2s var(--ease-out)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-  h2{font-size:23px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
-  h2 .em{color:var(--sg)}
-  .lede{font-size:14.5px;color:var(--sub);max-width:820px;margin-bottom:22px}
-  h3{font-size:16px;font-weight:800;margin:26px 0 10px}
-  h4{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin:18px 0 8px}
-  p{font-size:14px;margin-bottom:12px;max-width:840px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
-  .card h3{margin-top:0}
+h2{font-size:clamp(22px,3.4vw,28px);margin-bottom:6px}
+h2 .em{color:var(--brand)}
+.lede{font-size:17px;color:var(--body);max-width:70ch;margin-bottom:24px}
+h3{font-size:19px;margin:30px 0 10px}
+h4{font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--mute);margin:22px 0 9px}
+p{font-size:16px;margin-bottom:13px;max-width:72ch}
+b,strong{color:var(--ink)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:20px 22px;margin-bottom:16px}
+.card h3{margin-top:0}
 
-  .gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
-  .term{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sg);border-radius:9px;padding:12px 14px}
-  .term b{font-size:13.5px;display:block;margin-bottom:3px}
-  .term span{font-size:12.5px;color:var(--sub)}
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.term{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brand);
+  border-radius:0 var(--r-card) var(--r-card) 0;padding:13px 15px}
+.term b{font-size:15px;display:block;margin-bottom:3px}
+.term span{font-size:14.5px;color:var(--body)}
 
-  /* building blocks */
-  .stack{display:flex;flex-direction:column;gap:8px;max-width:960px}
-  .layer{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
-  .layer .lname{width:135px;font-weight:800;font-size:13px;flex:none}
-  .layer .lname small{display:block;font-weight:500;color:var(--mute);font-size:10.5px;margin-top:2px}
-  .layer .opts{display:flex;gap:8px;flex-wrap:wrap;flex:1}
-  .chip{font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;border:1px solid;line-height:1.3}
-  .chip small{display:block;font-weight:500;font-size:10px;opacity:.85}
-  .chip.g{background:var(--good-bg);border-color:#86efac;color:var(--good-ink)}
-  .chip.w{background:var(--weak-bg);border-color:#fecaca;color:var(--weak-ink)}
-  .chip.p{background:var(--part-bg);border-color:#fde68a;color:var(--part-ink)}
-  .chip.n{background:#f1f5f9;border-color:var(--line);color:var(--sub)}
-  .plus{text-align:center;color:#cbd5e1;font-weight:800;font-size:15px;margin:-2px 0}
-  .map{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:6px}
-  .mc{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;font-size:12px}
-  .mc b{display:block;font-size:12.5px;margin-bottom:3px}
-  .mc.good{border-left:4px solid var(--good-ink)} .mc.bad{border-left:4px solid var(--weak-ink)} .mc.rec{border-left:4px solid #2563eb;background:#eff6ff}
-  .pcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
-  .pc{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 16px;border-top:4px solid var(--line)}
-  .pc.good{border-top-color:var(--good-ink)} .pc.bad{border-top-color:var(--weak-ink)} .pc.rec{border-top-color:#2563eb}
-  .pc h4{font-size:14px;font-weight:800;text-transform:none;letter-spacing:0;color:var(--ink);margin:0 0 8px}
-  .pc h4 .v{font-size:9px;font-weight:800;letter-spacing:.04em;color:#fff;padding:1px 6px;border-radius:8px;margin-left:4px;vertical-align:middle}
-  .pc ul{list-style:none;margin:0 0 6px;padding:0;font-size:12.5px;line-height:1.4}
-  .pc li{padding-left:16px;position:relative;margin-bottom:3px}
-  .pc li.p:before{content:"✓";position:absolute;left:0;color:var(--good-ink);font-weight:800}
-  .pc li.c:before{content:"✗";position:absolute;left:0;color:var(--weak-ink);font-weight:800}
-  .pc .use{font-size:12px;color:var(--sub);border-top:1px solid var(--line);padding-top:7px;margin-top:4px}
-  .pc .use b{color:var(--ink)}
+.stack{display:flex;flex-direction:column;gap:8px;max-width:980px}
+.layer{display:flex;align-items:flex-start;gap:14px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r-card);padding:13px 16px}
+.layer .lname{width:140px;font-weight:600;font-size:14px;flex:none;color:var(--ink)}
+.layer .lname small{display:block;font-weight:400;color:var(--mute);font-size:12px;margin-top:2px}
+.layer .opts{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.chip{font-size:13px;font-weight:600;padding:6px 10px;border-radius:var(--r-control);
+  border:1px solid;line-height:1.3}
+.chip small{display:block;font-weight:400;font-size:11.5px;opacity:.9}
+.chip.g{background:var(--good-bg);border-color:var(--good-ink);color:var(--good-ink)}
+.chip.w{background:var(--weak-bg);border-color:var(--weak-ink);color:var(--weak-ink)}
+.chip.p{background:var(--part-bg);border-color:var(--part-ink);color:var(--part-ink)}
+.chip.n{background:var(--soft);border-color:var(--line);color:var(--mute)}
+.plus{text-align:center;color:var(--mute);font-weight:600;font-size:15px;margin:-2px 0}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:6px}
+.mc{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--card);
+  font-size:14px}
+.mc b{display:block;font-size:14.5px;margin-bottom:3px;color:var(--ink)}
+.mc.good{border-left:3px solid var(--good-ink)}
+.mc.bad{border-left:3px solid var(--weak-ink)}
+.mc.rec{border-left:3px solid var(--brand)}
+.pcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.pc{border:1px solid var(--line);border-radius:var(--r-card);background:var(--card);
+  padding:15px 17px;border-top:3px solid var(--line)}
+.pc.good{border-top-color:var(--good-ink)}
+.pc.bad{border-top-color:var(--weak-ink)}
+.pc.rec{border-top-color:var(--brand)}
+.pc h4{font-family:"Bricolage",sans-serif;font-size:17px;font-weight:600;text-transform:none;
+  letter-spacing:-.01em;color:var(--ink);margin:0 0 9px}
+.pc h4 .v{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:#fff;
+  padding:2px 7px;border-radius:99px;margin-left:5px;vertical-align:middle}
+.pc ul{list-style:none;margin:0 0 6px;padding:0;font-size:14.5px;line-height:1.5}
+.pc li{padding-left:19px;position:relative;margin-bottom:4px}
+.pc li.p:before{content:"\2713";position:absolute;left:0;color:var(--good-ink);font-weight:700}
+.pc li.c:before{content:"\2717";position:absolute;left:0;color:var(--weak-ink);font-weight:700}
+.pc .use{font-size:14px;color:var(--mute);border-top:1px solid var(--line);padding-top:8px;
+  margin-top:5px}
+.pc .use b{color:var(--ink)}
 
-  .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
-  table{width:100%;border-collapse:collapse;font-size:12px;min-width:860px}
-  th,td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-  thead th{font-weight:800;font-size:12px;background:#f8fafc;border-bottom:2px solid #cbd5e1;position:sticky;top:0}
-  .rowlab{font-weight:700;width:150px;background:#fafbfc;border-right:1px solid var(--line)}
-  .rowlab small{display:block;font-weight:500;color:var(--mute);font-size:10px;margin-top:1px}
-  .band td{background:#0f172a;color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px}
-  td.cell{line-height:1.32}
-  .good{background:var(--good-bg)} .good .g{color:var(--good-ink)}
-  .part{background:var(--part-bg)} .part .g{color:var(--part-ink)}
-  .weak{background:var(--weak-bg)} .weak .g{color:var(--weak-ink)}
-  .info{background:var(--info-bg)} .info .g{color:var(--info-ink)}
-  .g{font-weight:800;margin-right:3px}
-  .pkg{font-size:9.5px;font-weight:700;color:#fff;background:#6366f1;padding:0 5px;border-radius:7px;white-space:nowrap}
-  .keep{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.04em;color:#fff;background:var(--good-ink);padding:1px 6px;border-radius:8px;margin-left:4px}
-  .skip{background:var(--weak-ink)} .rec2{background:#2563eb}
-  th .colsub{display:block;font-weight:600;font-size:10px;color:var(--mute);margin-top:2px}
-  tr.verdict td{border-top:2px solid #cbd5e1;font-weight:700}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-card);
+  background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;
+  font-variant-numeric:tabular-nums}
+th,td{padding:9px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--mute);background:var(--soft);
+  border-bottom:1px solid var(--line);position:sticky;top:0}
+.rowlab{font-weight:600;width:158px;background:var(--soft);border-right:1px solid var(--line);
+  color:var(--ink)}
+.rowlab small{display:block;font-weight:400;color:var(--mute);font-size:12px;margin-top:2px}
+/* Not an ink inversion: --ink is near-white in dark mode, so inverting turned a
+   quiet section divider into a glaring stripe across the widest table. */
+.band td{background:var(--soft);color:var(--ink);font:600 11px ui-monospace,Menlo,monospace;
+  letter-spacing:.1em;text-transform:uppercase;padding:7px 11px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+td.cell{line-height:1.4}
+/* Scoped to td deliberately. good / part / weak are used both as a table-cell
+   modifier and as a card modifier (.pc.good, .mc.good, .callout.good), and the
+   cards want only their accent border. The original tints were pale enough that
+   a flooded card still looked intentional; these are not, and the unscoped rule
+   filled every verdict card with solid green. */
+td.good{background:var(--good-bg)} td.good .g{color:var(--good-ink)}
+td.part{background:var(--part-bg)} td.part .g{color:var(--part-ink)}
+td.weak{background:var(--weak-bg)} td.weak .g{color:var(--weak-ink)}
+td.info{background:var(--info-bg)} td.info .g{color:var(--info-ink)}
+.g{font-weight:700;margin-right:4px}
+.pkg{font:600 11px ui-monospace,Menlo,monospace;color:var(--bg);background:var(--mute);
+  padding:1px 6px;border-radius:99px;white-space:nowrap}
+.keep{display:inline-block;font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.05em;
+  color:#fff;background:var(--good-ink);padding:2px 7px;border-radius:99px;margin-left:5px}
+.skip{background:var(--weak-ink)} .rec2{background:var(--brand)}
+th .colsub{display:block;font-weight:400;font-size:11px;color:var(--mute);margin-top:2px;
+  text-transform:none;letter-spacing:0}
+tr.verdict td{border-top:2px solid var(--line);font-weight:600}
 
-  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--sub);align-items:center;margin:12px 0}
-  .legend .lg{display:flex;align-items:center;gap:6px}
-  .dot{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--mute);
+  align-items:center;margin:14px 0}
+.legend .lg{display:flex;align-items:center;gap:7px}
+.dot{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid var(--line)}
 
-  .callout{border-radius:12px;padding:18px 20px;margin:18px 0;border:1px solid}
-  .callout.warn{background:#fff7ed;border-color:#fed7aa}
-  .callout.bad{background:#fef2f2;border-color:#fecaca}
-  .callout.good{background:#f0fdf4;border-color:#bbf7d0}
-  .callout.blue{background:#eff6ff;border-color:#bfdbfe}
-  .callout h3{margin-top:0;display:flex;align-items:center;gap:8px}
-  .callout .tag{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:20px;color:#fff}
-  .callout.warn .tag{background:var(--part-ink)} .callout.bad .tag{background:var(--weak-ink)} .callout.good .tag{background:var(--good-ink)} .callout.blue .tag{background:#2563eb}
+.callout{border-radius:var(--r-card);padding:18px 20px;margin:20px 0;background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--line)}
+.callout.warn{border-left-color:var(--part-ink)}
+.callout.bad{border-left-color:var(--weak-ink)}
+.callout.good{border-left-color:var(--good-ink)}
+.callout.blue{border-left-color:var(--brand)}
+.callout h3{margin-top:0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.callout .tag{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 8px;border-radius:99px;color:#fff}
+.callout.warn .tag{background:var(--part-ink)}
+.callout.bad .tag{background:var(--weak-ink)}
+.callout.good .tag{background:var(--good-ink)}
+.callout.blue .tag{background:var(--brand)}
 
-  .bars{margin:8px 0 4px}
-  .bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}
-  .bar .lab{width:200px;font-weight:600;flex:none}
-  .bar .track{flex:1;background:#e2e8f0;border-radius:6px;height:22px;overflow:hidden}
-  .bar .fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:11.5px;font-weight:800}
+.bars{margin:10px 0 4px}
+.bar{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:15px}
+.bar .lab{width:210px;font-weight:600;flex:none;color:var(--ink)}
+.bar .track{flex:1;background:var(--soft);border-radius:4px;height:24px;overflow:hidden}
+.bar .fill{height:100%;border-radius:0 4px 4px 0;display:flex;align-items:center;
+  justify-content:flex-end;padding-right:9px;color:#fff;font:600 13px inherit;
+  font-variant-numeric:tabular-nums}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light]) .bar .fill{color:#16181a}
+}
 
-  .pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px}
-  .pill.m{background:#dbeafe;color:#1e40af} .pill.r{background:#f3e8ff;color:#7e22ce} .pill.v{background:#dcfce7;color:#166534}
+.pill{display:inline-block;font:600 11px ui-monospace,Menlo,monospace;padding:2px 8px;
+  border-radius:99px;letter-spacing:.04em}
+.pill.m{background:var(--info-bg);color:var(--info-ink)}
+.pill.r{background:var(--soft);color:var(--mute)}
+.pill.v{background:var(--good-bg);color:var(--good-ink)}
 
-  footer{max-width:1180px;margin:0 auto;padding:22px;color:var(--mute);font-size:12px;border-top:1px solid var(--line)}
-  .hero{background:linear-gradient(180deg,#fff,#fbfcfe);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
-  .hero .one{font-size:17px;font-weight:800;line-height:1.4}
-  .hero .one .hi{background:#fef9c3;padding:0 4px;border-radius:3px}
+footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);font-size:14px;
+  border-top:1px solid var(--line)}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;
+  margin-bottom:20px}
+.hero .one{font-family:"Bricolage",sans-serif;font-size:clamp(18px,2.6vw,21px);font-weight:500;
+  line-height:1.45;color:var(--ink);max-width:64ch;letter-spacing:-.01em}
+.hero .one .hi{background:var(--part-bg);color:var(--ink);padding:1px 5px;border-radius:3px}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+@media (max-width:640px){
+  /* The header is a lockup, a title, two paragraphs of dating caveat and two rows
+     of tabs: about 400px, which is half a phone viewport permanently occupied if
+     it stays stuck. It scrolls away here and the tabs are a scroll-up away, which
+     is what a phone reader expects anyway. */
+  .top{position:static}
+  .layer{flex-direction:column;gap:8px}
+  .layer .lname{width:auto}
+  .bar{flex-wrap:wrap}
+  .bar .lab{width:100%}
+  main{padding:22px 18px 60px}
+  .top .wrap{padding:12px 18px 0}
+}
 </style>
 </head>
 <body>
 
 <div class="top">
   <div class="wrap">
+    <a class="lock" href="https://lobang-scout.github.io/"><svg viewBox="2 0.2 23.8 28.8" width="18.2" height="22.0" aria-hidden="true" focusable="false" fill="var(--brand)" fill-rule="evenodd" style="flex:none;display:block"><path d="M2 2.6h10.4v26.4h-10.4z M12.4 9h7.6v20h-7.6zM5.2 0.2h4.2v2.4h-4.2zM3.20 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM7.40 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM11.60 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM15.80 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM20.00 18.80L25.80 20.42L25.80 22.62L20.00 21.00zM22.70 22.01h1.80V29.0h-1.80zM3.40 4.8h3.30v1.7h-3.30z M7.70 4.8h3.30v1.7h-3.30zM3.40 8.5h3.30v1.7h-3.30z M7.70 8.5h3.30v1.7h-3.30zM3.40 12.2h3.30v1.7h-3.30z M7.70 12.2h3.30v1.7h-3.30zM3.40 15.9h3.30v1.7h-3.30z M7.70 15.9h3.30v1.7h-3.30zM13.50 11.2h2.20v1.7h-2.20z M16.70 11.2h2.20v1.7h-2.20zM13.50 14.9h2.20v1.7h-2.20z M16.70 14.9h2.20v1.7h-2.20z"/></svg><span class="wm">Lobang&nbsp;Scout</span></a>
     <h1>Can Claude run a Singapore SME's back office?</h1>
     <div class="sub">Plain Claude · the small-business plugin · Claude + MCP connectors · vs. what SMEs already use — an evidence brief</div>
     <div class="sub" style="margin-top:.5rem;opacity:.8"><b>Dated evidence, not advice.</b> Runs are from Jun–Jul 2026. Product capabilities and Singapore grant schemes change; grant support in particular is mid-transition through 2026. Verify current scheme terms at the source before you budget anything. Nothing here is tax advice.</div>
@@ -267,7 +371,7 @@
   <table>
     <thead>
       <tr>
-        <th class="rowlab" style="background:#fff">Layer / front ↓</th>
+        <th class="rowlab" style="background:var(--card)">Layer / front ↓</th>
         <th>① Plain Claude <span class="pill m">m</span></th>
         <th>② + plugin <span class="skip keep">skip</span> <span class="pill m">m</span><span class="colsub">(± MCP)</span></th>
         <th>③ + MCP <span class="pill r">r</span><span class="colsub">e.g. Xero connector</span></th>
@@ -346,7 +450,7 @@
 
       <tr class="band"><td colspan="6">③ Filing — submit to IRAS</td></tr>
       <tr>
-        <td class="rowlab" style="background:#fff5f5">File GST F5 → IRAS</td>
+        <td class="rowlab" style="background:var(--weak-bg)">File GST F5 → IRAS</td>
         <td class="cell weak"><span class="g">✗</span> can't file</td>
         <td class="cell weak"><span class="g">✗</span> can't file</td>
         <td class="cell weak"><span class="g">✗</span> not in tool's reach</td>
@@ -515,10 +619,10 @@
   <p style="max-width:860px;font-size:13.5px;color:var(--sub)">With a <b>well-written prompt that already carries the SG rules</b>, we also scored overall quality (not just safety) across analysis, drafting and GST. Different question, different condition — here plain Claude leads. <b>These scores are from the June prior-model run and were not re-scored</b> — treat as historical; the relative ordering is the durable part.</p>
   <div class="card">
     <div class="bars">
-      <div class="bar"><span class="lab">L0 · Plain Claude</span><div class="track"><div class="fill" style="width:94%;background:#15803d">4.70</div></div></div>
-      <div class="bar"><span class="lab">L1 · Generic skills</span><div class="track"><div class="fill" style="width:86.4%;background:#16a34a">4.32</div></div></div>
-      <div class="bar"><span class="lab">L3 · Plugin + SG script</span><div class="track"><div class="fill" style="width:84.2%;background:#65a30d">4.21</div></div></div>
-      <div class="bar"><span class="lab">L2 · Small-business plugin</span><div class="track"><div class="fill" style="width:73.8%;background:#dc2626">3.69</div></div></div>
+      <div class="bar"><span class="lab">L0 · Plain Claude</span><div class="track"><div class="fill" style="width:94%;background:var(--bar)">4.70</div></div></div>
+      <div class="bar"><span class="lab">L1 · Generic skills</span><div class="track"><div class="fill" style="width:86.4%;background:var(--bar)">4.32</div></div></div>
+      <div class="bar"><span class="lab">L3 · Plugin + SG script</span><div class="track"><div class="fill" style="width:84.2%;background:var(--bar)">4.21</div></div></div>
+      <div class="bar"><span class="lab">L2 · Small-business plugin</span><div class="track"><div class="fill" style="width:73.8%;background:var(--bar)">3.69</div></div></div>
     </div>
     <p style="font-size:12.5px;color:var(--sub);margin:8px 0 0"><b>Plain Claude won outright.</b> The purpose-built plugin (L2) came <b>last</b> — its US-shaped guides added friction without quality. Adding our SG guardrail script (L3) rescued the plugin a lot, but still couldn't beat plain Claude — because the script's value isn't tied to the plugin.</p>
   </div>
@@ -594,7 +698,7 @@
     <thead><tr><th>Surface (what the SME does)</th><th>What SG SMEs use</th><th>Connector today?</th><th>What AI can do</th><th>Workaround now</th></tr></thead>
     <tbody>
       <tr><td class="rowlab">Accounting &amp; books</td><td>Xero (most common), QuickBooks, MYOB</td><td class="cell good"><span class="g">✓</span> Xero official · QBO sandbox <span class="pkg">📦 QBO</span></td><td class="cell">Read + post invoices, bills, ledger</td><td class="cell">Wire the Xero connector; reason in Claude</td></tr>
-      <tr><td class="rowlab" style="background:#fff5f5">GST F5 filing</td><td>myTax Portal + CorpPass</td><td class="cell weak"><span class="g">✗</span> no IRAS connector</td><td class="cell">Prepare figures only — <b>can't file</b></td><td class="cell">Xero one-click (ASR+); or key into myTax; or tax agent</td></tr>
+      <tr><td class="rowlab" style="background:var(--weak-bg)">GST F5 filing</td><td>myTax Portal + CorpPass</td><td class="cell weak"><span class="g">✗</span> no IRAS connector</td><td class="cell">Prepare figures only — <b>can't file</b></td><td class="cell">Xero one-click (ASR+); or key into myTax; or tax agent</td></tr>
       <tr><td class="rowlab">Getting paid</td><td>PayNow · NETS · FAST (+ cards)</td><td class="cell weak"><span class="g">✗</span> rails none · Stripe/PayPal ✓ <span class="pkg">📦</span> · Square N/A in SG</td><td class="cell">Card/online payments &amp; refunds; not local rails</td><td class="cell">Local gateway (e.g. HitPay); reconcile in Xero</td></tr>
       <tr><td class="rowlab">Customer comms</td><td>WhatsApp Business (top channel — industry est.)</td><td class="cell part"><span class="g">~</span> no official Meta one · third-party wrappers <span class="pkg">📦 Slack/Gmail</span></td><td class="cell">Read chats, draft replies</td><td class="cell">Third-party wrapper, or paste thread → Claude</td></tr>
       <tr><td class="rowlab">Selling — marketplaces</td><td>Shopee · Lazada · Carousell</td><td class="cell weak"><span class="g">✗</span> no seller connector (scrapers only)</td><td class="cell">Read public listings only</td><td class="cell">Export seller-centre CSV → Claude</td></tr>
