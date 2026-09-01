@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="crimson">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +8,44 @@
  About 280 graded runs against five synthetic Singapore businesses, plus a July 2026 re-run that
  retracted the headline. Free, no sign-up.">
 <meta name="theme-color" content="#a12915">
+<link rel="stylesheet" href="assets/ds.css">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
 :root{
-  --brand:#a12915; --brand-hi:#8c2312; --ink:#16181a; --body:#3f4145; --mute:#75777b;
-  --bg:#faf9f7; --card:#ffffff; --line:#e4e2de; --soft:#f3f1ed; --code:#1c1e20;
-  --good-bg:#e2f3e6; --good-ink:#006f36;
-  --part-bg:#fbeccf; --part-ink:#845700;
-  --weak-bg:#efe7e4; --weak-ink:#534b47;
-  --info-bg:#f1efec; --info-ink:#5f6165;
-  --sub:var(--body);
-  --bar:#a12915;
-  --r-control:8px; --r-card:12px;
+  /* Aliases over the workspace design system, which ships as assets/ds.css.
+     Wired by a peer session on 2026-09-01 and moved here from index.html,
+     because index.html is GENERATED and a hand-edit to it survives exactly
+     until the next build. --bg, --r-control and --r-card are the system's own
+     names and are deliberately absent: redeclaring --bg as var(--bg) is a
+     cycle. */
+  --brand:var(--accent); --brand-hi:var(--accent-solid-hover); --ink:var(--text);
+  --body:var(--text-2); --mute:var(--text-muted); --sub:var(--text-2);
+  --card:var(--surface); --line:var(--border); --soft:var(--surface-sunken);
+  --code:var(--surface-sunken); --on-brand:var(--text-onaccent);
+  --bar:var(--accent-solid);
+
+  /* The verdict tints, mixed off the system's own tokens rather than aliased
+     straight to them, and the reason is measured rather than felt.
+
+     Aliased plain, --success-bg and --warning-bg sit delta-E 3.8 apart, and
+     --weak-bg and --info-bg both resolve to --surface-sunken, which puts them
+     at delta-E 0.0: two of the four verdict states rendered as the same colour.
+     In a 130-cell matrix where two thirds are "good", that field encodes
+     nothing and the exceptions stop being findable, which is the one job the
+     matrix has.
+
+     color-mix keeps every value derived from a published token, so nothing here
+     is a number somebody typed, and it pulls the worst pair from 0.0 to 8.3
+     with ink contrast at 8.1:1 or better on all four. Percentages are the
+     output of a search over separation subject to that contrast floor. */
+  --good-bg:color-mix(in oklab, var(--success) 36%, var(--success-bg));
+  --good-ink:var(--success);
+  --part-bg:color-mix(in oklab, var(--warning) 28%, var(--warning-bg));
+  --part-ink:var(--warning);
+  --weak-bg:color-mix(in oklab, var(--text) 12%, var(--surface-sunken));
+  --weak-ink:var(--text-2);
+  --info-bg:var(--surface-sunken); --info-ink:var(--text-muted);
+
   --ease-out:cubic-bezier(.2,.8,.3,1);
   color-scheme:light;
 }
@@ -31,7 +57,7 @@
   font-weight:400 800;font-display:swap}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--body);line-height:1.6;font-size:16px;
+body{background:var(--bg);color:var(--body);line-height:1.6;font-size:var(--text-base);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   text-rendering:optimizeLegibility}
 a{color:var(--brand);text-underline-offset:3px}
@@ -42,98 +68,98 @@ h1,h2,h3,.wm{font-family:"Bricolage",-apple-system,BlinkMacSystemFont,"Segoe UI"
 
 /* header */
 .top{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
-.top .wrap{max-width:1180px;margin:0 auto;padding:14px 22px 0}
-.lock{display:flex;align-items:center;gap:7.5px;text-decoration:none;margin-bottom:12px;
+.top .wrap{max-width:1180px;margin:0 auto;padding:var(--s-3) var(--s-5) 0}
+.lock{display:flex;align-items:center;gap:.3em;text-decoration:none;margin-bottom:var(--s-3);
   min-height:44px;width:max-content}
-.wm{font-size:22px;line-height:1;color:var(--ink)}
-.top h1{font-size:clamp(19px,3.2vw,25px);margin-bottom:5px}
-.top .sub{font-size:14px;color:var(--mute);max-width:78ch}
+.wm{font-size:var(--text-xl);line-height:1;color:var(--ink)}
+.top h1{font-size:var(--text-xl);margin-bottom:var(--s-1)}
+.top .sub{font-size:var(--text-sm);color:var(--mute);max-width:78ch}
 .top .sub b{color:var(--ink)}
-nav{display:flex;gap:2px;margin-top:14px;flex-wrap:wrap}
+nav{display:flex;gap:2px;margin-top:var(--s-3);flex-wrap:wrap}
 nav button{background:transparent;border:0;color:var(--mute);font:600 14px inherit;
-  padding:11px 14px;min-height:44px;cursor:pointer;border-bottom:2px solid transparent;
+  padding:var(--s-3) var(--s-3);min-height:44px;cursor:pointer;border-bottom:2px solid transparent;
   border-radius:var(--r-control) var(--r-control) 0 0;
   transition:color 120ms var(--ease-out),background 120ms var(--ease-out)}
 nav button:hover{color:var(--ink);background:var(--soft)}
 nav button.active{color:var(--brand);border-bottom-color:var(--brand)}
 
-main{max-width:1180px;margin:0 auto;padding:30px 22px 70px}
+main{max-width:1180px;margin:0 auto;padding:var(--s-8) var(--s-5) var(--s-16)}
 .tab{display:none}
 .tab.active{display:block;animation:fade .2s var(--ease-out)}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-h2{font-size:clamp(22px,3.4vw,28px);margin-bottom:6px}
+h2{font-size:var(--text-2xl);margin-bottom:var(--s-1)}
 h2 .em{color:var(--brand)}
-.lede{font-size:17px;color:var(--body);max-width:70ch;margin-bottom:24px}
-h3{font-size:19px;margin:30px 0 10px}
+.lede{font-size:var(--text-base);color:var(--body);max-width:70ch;margin-bottom:var(--s-6)}
+h3{font-size:var(--text-md);margin:var(--s-8) 0 var(--s-2)}
 h4{font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;
-  letter-spacing:.12em;color:var(--mute);margin:22px 0 9px}
-p{font-size:16px;margin-bottom:13px;max-width:72ch}
+  letter-spacing:.12em;color:var(--mute);margin:var(--s-5) 0 var(--s-2)}
+p{font-size:var(--text-base);margin-bottom:var(--s-3);max-width:72ch}
 b,strong{color:var(--ink)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);
-  padding:20px 22px;margin-bottom:16px}
+  padding:var(--s-5) var(--s-5);margin-bottom:var(--s-4)}
 .card h3{margin-top:0}
 
-.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:var(--s-3)}
 .term{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brand);
-  border-radius:0 var(--r-card) var(--r-card) 0;padding:13px 15px}
-.term b{font-size:15px;display:block;margin-bottom:3px}
-.term span{font-size:14.5px;color:var(--body)}
+  border-radius:0 var(--r-card) var(--r-card) 0;padding:var(--s-3) var(--s-4)}
+.term b{font-size:var(--text-sm);display:block;margin-bottom:3px}
+.term span{font-size:var(--text-sm);color:var(--body)}
 
-.stack{display:flex;flex-direction:column;gap:8px;max-width:980px}
-.layer{display:flex;align-items:flex-start;gap:14px;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--r-card);padding:13px 16px}
-.layer .lname{width:140px;font-weight:600;font-size:14px;flex:none;color:var(--ink)}
-.layer .lname small{display:block;font-weight:400;color:var(--mute);font-size:12px;margin-top:2px}
-.layer .opts{display:flex;gap:8px;flex-wrap:wrap;flex:1}
-.chip{font-size:13px;font-weight:600;padding:6px 10px;border-radius:var(--r-control);
+.stack{display:flex;flex-direction:column;gap:var(--s-2);max-width:980px}
+.layer{display:flex;align-items:flex-start;gap:var(--s-3);background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s-3) var(--s-4)}
+.layer .lname{width:140px;font-weight:600;font-size:var(--text-sm);flex:none;color:var(--ink)}
+.layer .lname small{display:block;font-weight:400;color:var(--mute);font-size:var(--text-xs);margin-top:2px}
+.layer .opts{display:flex;gap:var(--s-2);flex-wrap:wrap;flex:1}
+.chip{font-size:var(--text-xs);font-weight:600;padding:var(--s-1) var(--s-2);border-radius:var(--r-control);
   border:1px solid;line-height:1.3}
-.chip small{display:block;font-weight:400;font-size:11.5px;opacity:.9}
+.chip small{display:block;font-weight:400;font-size:var(--text-xs);opacity:.9}
 .chip.g{background:var(--good-bg);border-color:var(--good-ink);color:var(--good-ink)}
 .chip.w{background:var(--weak-bg);border-color:var(--weak-ink);color:var(--weak-ink)}
 .chip.p{background:var(--part-bg);border-color:var(--part-ink);color:var(--part-ink)}
 .chip.n{background:var(--soft);border-color:var(--line);color:var(--mute)}
-.plus{text-align:center;color:var(--mute);font-weight:600;font-size:15px;margin:-2px 0}
-.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:6px}
-.mc{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--card);
-  font-size:14px}
-.mc b{display:block;font-size:14.5px;margin-bottom:3px;color:var(--ink)}
+.plus{text-align:center;color:var(--mute);font-weight:600;font-size:var(--text-sm);margin:0}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--s-2);margin-top:var(--s-1)}
+.mc{border:1px solid var(--line);border-radius:10px;padding:var(--s-3) var(--s-3);background:var(--card);
+  font-size:var(--text-sm)}
+.mc b{display:block;font-size:var(--text-sm);margin-bottom:3px;color:var(--ink)}
 .mc.good{border-left:3px solid var(--good-ink)}
 .mc.bad{border-left:3px solid var(--weak-ink)}
 .mc.rec{border-left:3px solid var(--brand)}
-.pcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.pcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--s-3)}
 .pc{border:1px solid var(--line);border-radius:var(--r-card);background:var(--card);
-  padding:15px 17px;border-top:3px solid var(--line)}
+  padding:var(--s-4) var(--s-4);border-top:3px solid var(--line)}
 .pc.good{border-top-color:var(--good-ink)}
 .pc.bad{border-top-color:var(--weak-ink)}
 .pc.rec{border-top-color:var(--brand)}
-.pc h4{font-family:"Bricolage",sans-serif;font-size:17px;font-weight:600;text-transform:none;
-  letter-spacing:-.01em;color:var(--ink);margin:0 0 9px}
-.pc h4 .v{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:#fff;
-  padding:2px 7px;border-radius:99px;margin-left:5px;vertical-align:middle}
-.pc ul{list-style:none;margin:0 0 6px;padding:0;font-size:14.5px;line-height:1.5}
-.pc li{padding-left:19px;position:relative;margin-bottom:4px}
+.pc h4{font-family:"Bricolage",sans-serif;font-size:var(--text-base);font-weight:600;text-transform:none;
+  letter-spacing:-.01em;color:var(--ink);margin:0 0 var(--s-2)}
+.pc h4 .v{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:var(--on-brand);
+  padding:2px var(--s-2);border-radius:99px;margin-left:var(--s-1);vertical-align:middle}
+.pc ul{list-style:none;margin:0 0 var(--s-1);padding:0;font-size:var(--text-sm);line-height:1.5}
+.pc li{padding-left:var(--s-5);position:relative;margin-bottom:var(--s-1)}
 .pc li.p:before{content:"\2713";position:absolute;left:0;color:var(--good-ink);font-weight:700}
 .pc li.c:before{content:"\2717";position:absolute;left:0;color:var(--weak-ink);font-weight:700}
-.pc .use{font-size:14px;color:var(--mute);border-top:1px solid var(--line);padding-top:8px;
-  margin-top:5px}
+.pc .use{font-size:var(--text-sm);color:var(--mute);border-top:1px solid var(--line);padding-top:var(--s-2);
+  margin-top:var(--s-1)}
 .pc .use b{color:var(--ink)}
 
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-card);
   background:var(--card)}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:860px;
+table{width:100%;border-collapse:collapse;font-size:var(--text-sm);min-width:860px;
   font-variant-numeric:tabular-nums}
-th,td{padding:9px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th,td{padding:var(--s-2) var(--s-3);text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
 thead th{font:600 11px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;
   text-transform:uppercase;color:var(--mute);background:var(--soft);
   border-bottom:1px solid var(--line);position:sticky;top:0}
 .rowlab{font-weight:600;width:158px;background:var(--soft);border-right:1px solid var(--line);
   color:var(--ink)}
-.rowlab small{display:block;font-weight:400;color:var(--mute);font-size:12px;margin-top:2px}
+.rowlab small{display:block;font-weight:400;color:var(--mute);font-size:var(--text-xs);margin-top:2px}
 /* Not an ink inversion: --ink is near-white in dark mode, so inverting turned a
    quiet section divider into a glaring stripe across the widest table. */
 .band td{background:var(--soft);color:var(--ink);font:600 11px ui-monospace,Menlo,monospace;
-  letter-spacing:.1em;text-transform:uppercase;padding:7px 11px;
+  letter-spacing:.1em;text-transform:uppercase;padding:var(--s-2) var(--s-3);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 td.cell{line-height:1.4}
 /* Scoped to td deliberately. good / part / weak are used both as a table-cell
@@ -145,56 +171,56 @@ td.good{background:var(--good-bg)} td.good .g{color:var(--good-ink)}
 td.part{background:var(--part-bg)} td.part .g{color:var(--part-ink)}
 td.weak{background:var(--weak-bg)} td.weak .g{color:var(--weak-ink)}
 td.info{background:var(--info-bg)} td.info .g{color:var(--info-ink)}
-.g{font-weight:700;margin-right:4px}
+.g{font-weight:700;margin-right:var(--s-1)}
 .pkg{font:600 11px ui-monospace,Menlo,monospace;color:var(--bg);background:var(--mute);
-  padding:1px 6px;border-radius:99px;white-space:nowrap}
+  padding:1px var(--s-1);border-radius:99px;white-space:nowrap}
 .keep{display:inline-block;font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.05em;
-  color:#fff;background:var(--good-ink);padding:2px 7px;border-radius:99px;margin-left:5px}
+  color:var(--on-brand);background:var(--good-ink);padding:2px var(--s-2);border-radius:99px;margin-left:var(--s-1)}
 .skip{background:var(--weak-ink)} .rec2{background:var(--brand)}
-th .colsub{display:block;font-weight:400;font-size:11px;color:var(--mute);margin-top:2px;
+th .colsub{display:block;font-weight:400;font-size:var(--text-xs);color:var(--mute);margin-top:2px;
   text-transform:none;letter-spacing:0}
 tr.verdict td{border-top:2px solid var(--line);font-weight:600}
 
-.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--mute);
-  align-items:center;margin:14px 0}
-.legend .lg{display:flex;align-items:center;gap:7px}
+.legend{display:flex;gap:var(--s-4);flex-wrap:wrap;font-size:var(--text-sm);color:var(--mute);
+  align-items:center;margin:var(--s-3) 0}
+.legend .lg{display:flex;align-items:center;gap:var(--s-2)}
 .dot{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid var(--line)}
 
-.callout{border-radius:var(--r-card);padding:18px 20px;margin:20px 0;background:var(--card);
+.callout{border-radius:var(--r-card);padding:var(--s-4) var(--s-5);margin:var(--s-5) 0;background:var(--card);
   border:1px solid var(--line);border-left:3px solid var(--line)}
 .callout.warn{border-left-color:var(--part-ink)}
 .callout.bad{border-left-color:var(--weak-ink)}
 .callout.good{border-left-color:var(--good-ink)}
 .callout.blue{border-left-color:var(--brand)}
-.callout h3{margin-top:0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.callout h3{margin-top:0;display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap}
 .callout .tag{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.1em;
-  text-transform:uppercase;padding:3px 8px;border-radius:99px;color:#fff}
+  text-transform:uppercase;padding:3px var(--s-2);border-radius:99px;color:var(--on-brand)}
 .callout.warn .tag{background:var(--part-ink)}
 .callout.bad .tag{background:var(--weak-ink)}
 .callout.good .tag{background:var(--good-ink)}
 .callout.blue .tag{background:var(--brand)}
 
-.bars{margin:10px 0 4px}
-.bar{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:15px}
+.bars{margin:var(--s-2) 0 var(--s-1)}
+.bar{display:flex;align-items:center;gap:var(--s-3);margin:var(--s-2) 0;font-size:var(--text-sm)}
 .bar .lab{width:210px;font-weight:600;flex:none;color:var(--ink)}
 .bar .track{flex:1;background:var(--soft);border-radius:4px;height:24px;overflow:hidden}
 .bar .fill{height:100%;border-radius:0 4px 4px 0;display:flex;align-items:center;
-  justify-content:flex-end;padding-right:9px;color:#fff;font:600 13px inherit;
+  justify-content:flex-end;padding-right:var(--s-2);color:var(--on-brand);font:600 13px inherit;
   font-variant-numeric:tabular-nums}
 
-.pill{display:inline-block;font:600 11px ui-monospace,Menlo,monospace;padding:2px 8px;
+.pill{display:inline-block;font:600 11px ui-monospace,Menlo,monospace;padding:2px var(--s-2);
   border-radius:99px;letter-spacing:.04em}
 .pill.m{background:var(--info-bg);color:var(--info-ink)}
 .pill.r{background:var(--soft);color:var(--mute)}
 .pill.v{background:var(--good-bg);color:var(--good-ink)}
 
-footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);font-size:14px;
+footer{max-width:1180px;margin:0 auto;padding:var(--s-6) var(--s-5) var(--s-16);color:var(--mute);font-size:var(--text-sm);
   border-top:1px solid var(--line)}
-.hero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;
-  margin-bottom:20px}
-.hero .one{font-family:"Bricolage",sans-serif;font-size:clamp(18px,2.6vw,21px);font-weight:500;
+.hero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:var(--s-6);
+  margin-bottom:var(--s-5)}
+.hero .one{font-family:"Bricolage",sans-serif;font-size:var(--text-lg);font-weight:500;
   line-height:1.45;color:var(--ink);max-width:64ch;letter-spacing:-.01em}
-.hero .one .hi{background:var(--part-bg);color:var(--ink);padding:1px 5px;border-radius:3px}
+.hero .one .hi{background:var(--part-bg);color:var(--ink);padding:1px var(--s-1);border-radius:3px}
 
 @media (prefers-reduced-motion:reduce){
   *{transition-duration:.01ms !important;animation-duration:.01ms !important}
@@ -205,12 +231,12 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
      it stays stuck. It scrolls away here and the tabs are a scroll-up away, which
      is what a phone reader expects anyway. */
   .top{position:static}
-  .layer{flex-direction:column;gap:8px}
+  .layer{flex-direction:column;gap:var(--s-2)}
   .layer .lname{width:auto}
   .bar{flex-wrap:wrap}
   .bar .lab{width:100%}
-  main{padding:22px 18px 60px}
-  .top .wrap{padding:12px 18px 0}
+  main{padding:var(--s-5) var(--s-4) var(--s-16)}
+  .top .wrap{padding:var(--s-3) var(--s-4) 0}
 }
 </style>
 </head>
@@ -218,10 +244,10 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
 <div class="top">
   <div class="wrap">
-    <a class="lock" href="https://lobang-scout.github.io/"><svg viewBox="2 0.2 23.8 28.8" width="18.2" height="22.0" aria-hidden="true" focusable="false" fill="var(--brand)" fill-rule="evenodd" style="flex:none;display:block"><path d="M2 2.6h10.4v26.4h-10.4z M12.4 9h7.6v20h-7.6zM5.2 0.2h4.2v2.4h-4.2zM3.20 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM7.40 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM11.60 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM15.80 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM20.00 18.80L25.80 20.42L25.80 22.62L20.00 21.00zM22.70 22.01h1.80V29.0h-1.80zM3.40 4.8h3.30v1.7h-3.30z M7.70 4.8h3.30v1.7h-3.30zM3.40 8.5h3.30v1.7h-3.30z M7.70 8.5h3.30v1.7h-3.30zM3.40 12.2h3.30v1.7h-3.30z M7.70 12.2h3.30v1.7h-3.30zM3.40 15.9h3.30v1.7h-3.30z M7.70 15.9h3.30v1.7h-3.30zM13.50 11.2h2.20v1.7h-2.20z M16.70 11.2h2.20v1.7h-2.20zM13.50 14.9h2.20v1.7h-2.20z M16.70 14.9h2.20v1.7h-2.20z"/></svg><span class="wm">Lobang&nbsp;Scout</span></a>
+    <a class="lock" href="https://lobang-scout.github.io/"><svg viewBox="2 0.2 23.8 28.8" width="0.826em" height="1.000em" aria-hidden="true" focusable="false" fill="var(--brand)" fill-rule="evenodd" style="flex:none;display:block;"><path d="M2 2.6h10.4v26.4h-10.4z M12.4 9h7.6v20h-7.6zM5.2 0.2h4.2v2.4h-4.2zM3.20 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM7.40 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM11.60 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM15.80 29.0V25.90a1.50 1.70 0 0 1 3.00 0V29.0zM20.00 18.80L25.80 20.42L25.80 22.62L20.00 21.00zM22.70 22.01h1.80V29.0h-1.80zM3.40 4.8h3.30v1.7h-3.30z M7.70 4.8h3.30v1.7h-3.30zM3.40 8.5h3.30v1.7h-3.30z M7.70 8.5h3.30v1.7h-3.30zM3.40 12.2h3.30v1.7h-3.30z M7.70 12.2h3.30v1.7h-3.30zM3.40 15.9h3.30v1.7h-3.30z M7.70 15.9h3.30v1.7h-3.30zM13.50 11.2h2.20v1.7h-2.20z M16.70 11.2h2.20v1.7h-2.20zM13.50 14.9h2.20v1.7h-2.20z M16.70 14.9h2.20v1.7h-2.20z"/></svg><span class="wm">Lobang&nbsp;Scout</span></a>
     <h1>Can Claude run a Singapore SME's back office?</h1>
     <div class="sub">Plain Claude · the small-business plugin · Claude + MCP connectors · vs. what SMEs already use: an evidence brief</div>
-    <div class="sub" style="margin-top:.5rem;opacity:.8"><b>Dated evidence, not advice.</b> Runs are from Jun–Jul 2026. Product capabilities and Singapore grant schemes change; grant support in particular is mid-transition through 2026. Verify current scheme terms at the source before you budget anything. Nothing here is tax advice.</div>
+    <div class="sub" style="margin-top:var(--s-2);opacity:.8;"><b>Dated evidence, not advice.</b> Runs are from Jun–Jul 2026. Product capabilities and Singapore grant schemes change; grant support in particular is mid-transition through 2026. Verify current scheme terms at the source before you budget anything. Nothing here is tax advice.</div>
     <nav>
       <button data-tab="start" class="active">① Start here</button>
       <button data-tab="compare">② The comparison</button>
@@ -242,7 +268,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   <h2>What this is, in one minute</h2>
   <p>A Singapore SME owner has a few recurring chores: work out cash flow, reply to customers, and, if GST-registered, file the quarterly <b>GST F5</b> tax return. AI tools promise to help. I put four realistic setups head-to-head on the same tasks, using <b>5 made-up (but realistic) Singapore businesses</b>: a bubble-tea shop, a minimart, an aircon trades firm, a design studio, and a bookkeeping back office.</p>
   <p>I ran <b>~280 graded runs</b> across four rounds (quality, GST safety, cash-flow/drafting safety, and a live connector probe, see "What was tested" below), then <b>re-ran the safety rounds in July 2026 on a newer model</b> to see what had changed. Every answer was produced by Claude Sonnet and independently graded by Claude Opus. All the business data is synthetic and Singapore-localised (SGD, GST 9%, PayNow, WhatsApp). No real company data. <b>The headline moved between the two runs</b>, and that shift is itself the main finding (③).</p>
-  <p style="font-size:13px;color:var(--mute)"><b>How to read this:</b> ① context (here) → ② the framework (three layers) → ③ the evidence (the runs) → ④ tool-by-tool (what an AI connector can actually reach).</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);"><b>How to read this:</b> ① context (here) → ② the framework (three layers) → ③ the evidence (the runs) → ④ tool-by-tool (what an AI connector can actually reach).</p>
 
   <h3>The four setups compared</h3>
   <div class="gloss">
@@ -254,7 +280,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <h3>What was tested: every combination</h3>
   <div class="scroll">
-  <table style="min-width:760px">
+  <table style="min-width:760px;">
     <thead><tr><th>Round</th><th>Question</th><th>Setups compared</th><th>Workflows</th><th>Runs</th></tr></thead>
     <tbody>
       <tr><td><b>1 · Quality</b></td><td>Which gives the best output? (expert prompt)</td><td>plain · generic skills · plugin · plugin+script</td><td>cash-flow · drafting · GST</td><td>28</td></tr>
@@ -264,7 +290,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:11.5px;color:var(--mute)">The per-setup coverage grid (what's measured vs still reasoned) is at the foot of <b>③ What I found</b>.</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);">The per-setup coverage grid (what's measured vs still reasoned) is at the foot of <b>③ What I found</b>.</p>
 
   <h3>Plain-language glossary</h3>
   <div class="gloss">
@@ -280,9 +306,9 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     <div class="term"><b>L0 / L1 / L2 / L3</b><span>The test "layers": L0 plain Claude · L1 generic skills · L2 the small-business plugin · L3 plugin + the SG guardrail script.</span></div>
   </div>
 
-  <div class="callout good" style="margin-top:24px">
+  <div class="callout good" style="margin-top:var(--s-6);">
     <h3><span class="tag">bottom line</span> It's not one tool, it's a combination, and it moves over time</h3>
-    <p style="margin-bottom:0"><b>Keep the status quo (Xero) for the books &amp; filing</b>: only it produces a deterministic, audit-trailed number and files it to IRAS. <b>Add plain Claude for the thinking</b>: cash-flow questions, customer replies, what-ifs. <b>Add a thin SG guardrail for anything customer- or forecast-facing:</b> on the mid-2026 re-run Claude got GST <i>right</i> unguarded (the old catastrophic-underpay finding no longer reproduces, a knowledge gap the model closed by itself), yet it still <b>fabricated forecast confidence bands and over-promised refunds to customers in nearly every run</b>, behavioural flaws a thin guardrail eliminated. <b>Skip the small-business plugin for the books</b>: its 10 finance skills carry zero SG tax logic (I read them), it adds friction, and its US-shaped format was the <i>worst</i> offender on invented forecast precision. The pattern to remember: <b>knowledge gaps close with every model release; behavioural and structural gaps don't</b>.</p>
+    <p style="margin-bottom:0;"><b>Keep the status quo (Xero) for the books &amp; filing</b>: only it produces a deterministic, audit-trailed number and files it to IRAS. <b>Add plain Claude for the thinking</b>: cash-flow questions, customer replies, what-ifs. <b>Add a thin SG guardrail for anything customer- or forecast-facing:</b> on the mid-2026 re-run Claude got GST <i>right</i> unguarded (the old catastrophic-underpay finding no longer reproduces, a knowledge gap the model closed by itself), yet it still <b>fabricated forecast confidence bands and over-promised refunds to customers in nearly every run</b>, behavioural flaws a thin guardrail eliminated. <b>Skip the small-business plugin for the books</b>: its 10 finance skills carry zero SG tax logic (I read them), it adds friction, and its US-shaped format was the <i>worst</i> offender on invented forecast precision. The pattern to remember: <b>knowledge gaps close with every model release; behavioural and structural gaps don't</b>.</p>
   </div>
 </section>
 
@@ -293,7 +319,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <!-- ---- A. building blocks ---- -->
   <h3>A. The building blocks</h3>
-  <p style="max-width:840px">Claude's intelligence is the constant, and it <i>improves over time</i> (the mid-2026 re-run in ③ shows the tax-knowledge gap closing on its own). Everything else is a choice in one of three layers. <b>An MCP connector upgrades the <span style="color:var(--good-ink)">Data</span> layer; the small-business plugin's US format <span style="color:var(--weak-ink)">downgrades Processing</span> (fabricated precision + friction); an SG guardrail <span style="color:var(--good-ink)">upgrades Processing</span> (bans invented precision &amp; over-commitment).</b> No AI option clears the Filing gate.</p>
+  <p style="max-width:840px;">Claude's intelligence is the constant, and it <i>improves over time</i> (the mid-2026 re-run in ③ shows the tax-knowledge gap closing on its own). Everything else is a choice in one of three layers. <b>An MCP connector upgrades the <span style="color:var(--good-ink);">Data</span> layer; the small-business plugin's US format <span style="color:var(--weak-ink);">downgrades Processing</span> (fabricated precision + friction); an SG guardrail <span style="color:var(--good-ink);">upgrades Processing</span> (bans invented precision &amp; over-commitment).</b> No AI option clears the Filing gate.</p>
 
   <div class="stack">
     <div class="layer">
@@ -340,18 +366,18 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <div class="callout bad">
     <h3><span class="tag">your question</span> "What if we run the plugin <i>with</i> MCP? Doesn't account config fix it?"</h3>
-    <p style="margin-bottom:6px"><b>The data gets fixed. The format doesn't.</b> An MCP on an SG Xero org pulls SG data via account config (SGD, GST 9%) <i>even under the plugin</i>. At the current model Claude also handles the SG <i>tax</i> correctly under the plugin: the old "US process overrides SG knowledge" harm has faded (see the re-run in ③).</p>
-    <p style="margin-bottom:0">But the plugin's <b>output format</b> is the live problem: it fabricates forecast confidence bands in <i>every</i> cash-flow run (4/4, see ③), now dressed on authoritative-looking live data. <b>The fix isn't a connector, it's the Processing block:</b> drop the plugin, use Claude's own knowledge + a thin SG guardrail that bans invented precision and unauthorised commitments. That you <i>can</i> change; the missing local connectors and the CorpPass filing gate you can't.</p>
+    <p style="margin-bottom:var(--s-1);"><b>The data gets fixed. The format doesn't.</b> An MCP on an SG Xero org pulls SG data via account config (SGD, GST 9%) <i>even under the plugin</i>. At the current model Claude also handles the SG <i>tax</i> correctly under the plugin: the old "US process overrides SG knowledge" harm has faded (see the re-run in ③).</p>
+    <p style="margin-bottom:0;">But the plugin's <b>output format</b> is the live problem: it fabricates forecast confidence bands in <i>every</i> cash-flow run (4/4, see ③), now dressed on authoritative-looking live data. <b>The fix isn't a connector, it's the Processing block:</b> drop the plugin, use Claude's own knowledge + a thin SG guardrail that bans invented precision and unauthorised commitments. That you <i>can</i> change; the missing local connectors and the CorpPass filing gate you can't.</p>
   </div>
 
   <!-- ---- B. matrix ---- -->
   <h3>B. The detailed matrix</h3>
   <div class="legend">
-    <span style="font-weight:700">Cell:</span>
-    <span class="lg"><span class="dot" style="background:var(--good-bg);border:1px solid var(--good-ink)"></span> strong</span>
-    <span class="lg"><span class="dot" style="background:var(--part-bg);border:1px solid var(--part-ink)"></span> partial / workaround</span>
-    <span class="lg"><span class="dot" style="background:var(--weak-bg);border:1px solid var(--weak-ink)"></span> gap</span>
-    <span class="lg"><span class="dot" style="background:var(--info-bg);border:1px solid var(--info-ink)"></span> neutral</span>
+    <span style="font-weight:700;">Cell:</span>
+    <span class="lg"><span class="dot" style="background:var(--good-bg);border:1px solid var(--good-ink);"></span> strong</span>
+    <span class="lg"><span class="dot" style="background:var(--part-bg);border:1px solid var(--part-ink);"></span> partial / workaround</span>
+    <span class="lg"><span class="dot" style="background:var(--weak-bg);border:1px solid var(--weak-ink);"></span> gap</span>
+    <span class="lg"><span class="dot" style="background:var(--info-bg);border:1px solid var(--info-ink);"></span> neutral</span>
     <span class="lg"><span class="pill m">measured</span> from runs</span>
     <span class="lg"><span class="pill r">reasoned</span> not yet run</span>
     <span class="lg"><span class="pill v">web-verified</span></span>
@@ -361,7 +387,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   <table>
     <thead>
       <tr>
-        <th class="rowlab" style="background:var(--card)">Layer / front ↓</th>
+        <th class="rowlab" style="background:var(--card);">Layer / front ↓</th>
         <th>① Plain Claude <span class="pill m">m</span></th>
         <th>② + plugin <span class="skip keep">skip</span> <span class="pill m">m</span><span class="colsub">(± MCP)</span></th>
         <th>③ + MCP <span class="pill r">r</span><span class="colsub">e.g. Xero connector</span></th>
@@ -440,7 +466,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
       <tr class="band"><td colspan="6">③ Filing: submit to IRAS</td></tr>
       <tr>
-        <td class="rowlab" style="background:var(--weak-bg)">File GST F5 → IRAS</td>
+        <td class="rowlab" style="background:var(--weak-bg);">File GST F5 → IRAS</td>
         <td class="cell weak"><span class="g">✗</span> can't file</td>
         <td class="cell weak"><span class="g">✗</span> can't file</td>
         <td class="cell weak"><span class="g">✗</span> not in tool's reach</td>
@@ -468,11 +494,11 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:11.5px;color:var(--mute)">The "★ + SG script" column is <b>directly measured</b> (plain Claude + the SG script, no plugin, see the safety benchmark on the results tab); it matches plugin+script, confirming the plugin adds nothing. The "+ MCP" <b>connector/data layer is now confirmed live</b> (a Singapore Xero org returned SGD + GST 9% from config; 68 invoices pulled live; no filing endpoint, see results tab). Only the reasoning-over-MCP <i>quality</i> rows remain inferred from the non-MCP runs.</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);">The "★ + SG script" column is <b>directly measured</b> (plain Claude + the SG script, no plugin, see the safety benchmark on the results tab); it matches plugin+script, confirming the plugin adds nothing. The "+ MCP" <b>connector/data layer is now confirmed live</b> (a Singapore Xero org returned SGD + GST 9% from config; 68 invoices pulled live; no filing endpoint, see results tab). Only the reasoning-over-MCP <i>quality</i> rows remain inferred from the non-MCP runs.</p>
 
   <!-- ---- C. pros & cons per combination ---- -->
   <h3>C. Pros &amp; cons of each combination</h3>
-  <p style="max-width:840px">The matrix above distilled into a "should I use this?" card per setup, each line grounded in the measured runs (③).</p>
+  <p style="max-width:840px;">The matrix above distilled into a "should I use this?" card per setup, each line grounded in the measured runs (③).</p>
   <div class="pcgrid">
     <div class="pc good">
       <h4>① Plain Claude</h4>
@@ -500,7 +526,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </div>
 
     <div class="pc good">
-      <h4>③ + MCP connector <span class="v" style="background:var(--mute)">live-tested</span></h4>
+      <h4>③ + MCP connector <span class="v" style="background:var(--mute);">live-tested</span></h4>
       <ul>
         <li class="p">Live auto-pull; <b>inherits SG config</b> (confirmed: SGD + GST 9%)</li>
         <li class="p">Keeps Claude's SG knowledge, good for live-ledger reasoning</li>
@@ -523,7 +549,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </div>
 
     <div class="pc good">
-      <h4>④ Status quo: Xero <span class="v keep" style="margin-left:4px">keep</span></h4>
+      <h4>④ Status quo: Xero <span class="v keep" style="margin-left:var(--s-1);">keep</span></h4>
       <ul>
         <li class="p">Deterministic, audit-trailed; <b>files the F5 to IRAS</b> (ASR+)</li>
         <li class="p">Native SG GST framework (reverse charge, Customer Accounting, IGDS)</li>
@@ -543,9 +569,9 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <div class="callout blue">
     <h3><span class="tag">the headline</span> What changed between two model versions, and what didn't</h3>
-    <p style="margin-bottom:10px">Same tests, same synthetic data, two model versions ~two months apart. The failures that were about <b>knowledge</b> closed on their own; the ones about <b>behaviour</b> and <b>plumbing</b> did not.</p>
+    <p style="margin-bottom:var(--s-2);">Same tests, same synthetic data, two model versions ~two months apart. The failures that were about <b>knowledge</b> closed on their own; the ones about <b>behaviour</b> and <b>plumbing</b> did not.</p>
     <div class="scroll">
-    <table style="min-width:720px">
+    <table style="min-width:720px;">
       <thead><tr><th>Failure mode</th><th>Jun 2026<br><small>prior model</small></th><th>Jul 2026<br><small>current model</small></th><th>Trajectory</th></tr></thead>
       <tbody>
         <tr><td><b>Catastrophic GST underpay</b> <small>(importer, unguarded)</small></td><td class="cell weak">plain 40% · plugin 60%</td><td class="cell good"><b>0 / 13</b></td><td class="cell">▼ <b>Closing</b>: a knowledge gap, shrinks each model release</td></tr>
@@ -556,14 +582,14 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
       </tbody>
     </table>
     </div>
-    <p style="margin-bottom:0;font-size:12.5px"><b>The takeaway that won't go stale:</b> don't buy a tool for what the base model will soon do anyway (tax knowledge). Buy <b>guardrails</b> for behaviour and <b>connectors</b> for reach, and <b>re-run this yourself</b> on whatever model you're on, because the top row keeps moving.</p>
+    <p style="margin-bottom:0;font-size:var(--text-xs);"><b>The takeaway that won't go stale:</b> don't buy a tool for what the base model will soon do anyway (tax knowledge). Buy <b>guardrails</b> for behaviour and <b>connectors</b> for reach, and <b>re-run this yourself</b> on whatever model you're on, because the top row keeps moving.</p>
   </div>
 
   <h3>The GST safety story: a June finding that reversed in July</h3>
-  <p style="max-width:860px">The realistic case is a non-expert owner who just asks <i>"help me settle my GST."</i> In <b>June 2026</b> I ran that exact naive close <b>10 times per setup, on 2 GST businesses</b>, a design <b>studio</b> and an <b>importer</b> (back-office with overseas bills), free-form, <b>no safety hints</b>, independently judged against the true tax figures. Unguarded Claude underpaid <i>every</i> time; the plugin was worst. <b>Those June rates (prior model):</b></p>
+  <p style="max-width:860px;">The realistic case is a non-expert owner who just asks <i>"help me settle my GST."</i> In <b>June 2026</b> I ran that exact naive close <b>10 times per setup, on 2 GST businesses</b>, a design <b>studio</b> and an <b>importer</b> (back-office with overseas bills), free-form, <b>no safety hints</b>, independently judged against the true tax figures. Unguarded Claude underpaid <i>every</i> time; the plugin was worst. <b>Those June rates (prior model):</b></p>
 
   <div class="scroll">
-  <table style="min-width:720px">
+  <table style="min-width:720px;">
     <thead><tr>
       <th>Setup · naive prompt (10 runs per business)</th>
       <th>Underpaid IRAS<br><small>studio</small></th>
@@ -578,23 +604,23 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:11.5px;color:var(--mute)">¹ Catastrophic = claimed the disallowed import GST off overseas invoices (no Customs permit) → net GST well below the true figure; the worst run underpaid by ~S$9,200. The importer is the back-office bookkeeper; the studio has no imports.</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);">¹ Catastrophic = claimed the disallowed import GST off overseas invoices (no Customs permit) → net GST well below the true figure; the worst run underpaid by ~S$9,200. The importer is the back-office bookkeeper; the studio has no imports.</p>
 
   <div class="callout bad">
     <h3><span class="tag">the reversal</span> Re-run in July, the catastrophic GST error was gone</h3>
-    <p style="margin-bottom:6px">I re-ran the naive importer close on the <b>current model</b>. The blatant import-GST trap, claiming GST off overseas invoices without a Customs permit, fired <b>0 times in 13 unguarded runs</b> (7 plain + 6 plugin). The plugin was no longer worse than plain; both produced essentially the correct net GST (~S$17,6xx). <b>The June "guardrails are the whole game" claim for tax no longer holds</b>: the model closed that knowledge gap on its own.</p>
-    <p style="margin-bottom:0"><b>But the guardrail didn't stop earning its keep: its value moved</b> from tax knowledge to <i>behaviour</i>: fabricated forecast precision and over-commitment, which did <b>not</b> improve (next section). Knowledge was the part the model could outgrow; behaviour isn't.</p>
+    <p style="margin-bottom:var(--s-1);">I re-ran the naive importer close on the <b>current model</b>. The blatant import-GST trap, claiming GST off overseas invoices without a Customs permit, fired <b>0 times in 13 unguarded runs</b> (7 plain + 6 plugin). The plugin was no longer worse than plain; both produced essentially the correct net GST (~S$17,6xx). <b>The June "guardrails are the whole game" claim for tax no longer holds</b>: the model closed that knowledge gap on its own.</p>
+    <p style="margin-bottom:0;"><b>But the guardrail didn't stop earning its keep: its value moved</b> from tax knowledge to <i>behaviour</i>: fabricated forecast precision and over-commitment, which did <b>not</b> improve (next section). Knowledge was the part the model could outgrow; behaviour isn't.</p>
   </div>
 
   <div class="callout warn">
     <h3><span class="tag">method honesty</span> Why these are the numbers I trust</h3>
-    <p style="margin-bottom:0">I also ran a <b>primed</b> version (the other 80 runs) where each run was asked "did you claim import GST off invoices?", and it scored <b>0% errors almost everywhere</b>. Asking the question made the model careful and suppressed the very mistake. That 0%-vs-100% gap is itself a finding: <b>how you prompt dominates the result</b>. A real owner never asks themselves the safety question, so the free-form rates above are the honest ones.</p>
+    <p style="margin-bottom:0;">I also ran a <b>primed</b> version (the other 80 runs) where each run was asked "did you claim import GST off invoices?", and it scored <b>0% errors almost everywhere</b>. Asking the question made the model careful and suppressed the very mistake. That 0%-vs-100% gap is itself a finding: <b>how you prompt dominates the result</b>. A real owner never asks themselves the safety question, so the free-form rates above are the honest ones.</p>
   </div>
 
-  <h3 style="margin-top:34px">Where the guardrail still earns its keep: behaviour (cash-flow &amp; drafting)</h3>
-  <p style="max-width:860px">These failures aren't about tax knowledge, they're about <i>behaviour</i>: inventing precision the data can't support, and promising things on the owner's behalf. <b>Unlike GST, they did not improve on the newer model.</b> Flaw rates, June → July re-run (July: free-form, n=4 per setup, independently judged):</p>
+  <h3 style="margin-top:var(--s-8);">Where the guardrail still earns its keep: behaviour (cash-flow &amp; drafting)</h3>
+  <p style="max-width:860px;">These failures aren't about tax knowledge, they're about <i>behaviour</i>: inventing precision the data can't support, and promising things on the owner's behalf. <b>Unlike GST, they did not improve on the newer model.</b> Flaw rates, June → July re-run (July: free-form, n=4 per setup, independently judged):</p>
   <div class="scroll">
-  <table style="min-width:720px">
+  <table style="min-width:720px;">
     <thead><tr><th>Setup</th><th>Cash-flow: invented confidence bands<br><small>Jun → Jul</small></th><th>Complaints: unauthorised commitment¹<br><small>Jun → Jul</small></th></tr></thead>
     <tbody>
       <tr><td>Plain Claude</td><td class="cell good">22% → <b>0/4</b></td><td class="cell weak">83% → <b>4/4</b></td></tr>
@@ -603,23 +629,23 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:11.5px;color:var(--mute)">¹ promised a refund / instalment / credit without gating to owner approval. <b>The plugin fabricates cash-flow confidence bands in every run</b> (4/4), a format artefact (it emits default ±30% bands), not a knowledge gap the model can outgrow. Unguarded, Claude over-commits on the owner's behalf in <b>every</b> complaint run (plain and plugin, 8/8), and the plugin's own "approval gate" note didn't stop it: the customer-facing reply still promised. The SG guardrail cut both to <b>0/4</b>. <b>This is the guardrail's durable value: behaviour, not tax.</b> (Lean re-run: n=4/setup, one persona each; effects are extreme so directionally solid.)</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);">¹ promised a refund / instalment / credit without gating to owner approval. <b>The plugin fabricates cash-flow confidence bands in every run</b> (4/4), a format artefact (it emits default ±30% bands), not a knowledge gap the model can outgrow. Unguarded, Claude over-commits on the owner's behalf in <b>every</b> complaint run (plain and plugin, 8/8), and the plugin's own "approval gate" note didn't stop it: the customer-facing reply still promised. The SG guardrail cut both to <b>0/4</b>. <b>This is the guardrail's durable value: behaviour, not tax.</b> (Lean re-run: n=4/setup, one persona each; effects are extreme so directionally solid.)</p>
 
-  <h3 style="margin-top:34px">Separately: output quality (28 expert-prompt runs, June prior-model)</h3>
-  <p style="max-width:860px;font-size:13.5px;color:var(--sub)">With a <b>well-written prompt that already carries the SG rules</b>, I also scored overall quality (not just safety) across analysis, drafting and GST. Different question, different condition, and here plain Claude leads. <b>These scores are from the June prior-model run and were not re-scored</b>, so treat as historical; the relative ordering is the durable part.</p>
+  <h3 style="margin-top:var(--s-8);">Separately: output quality (28 expert-prompt runs, June prior-model)</h3>
+  <p style="max-width:860px;font-size:var(--text-sm);color:var(--sub);">With a <b>well-written prompt that already carries the SG rules</b>, I also scored overall quality (not just safety) across analysis, drafting and GST. Different question, different condition, and here plain Claude leads. <b>These scores are from the June prior-model run and were not re-scored</b>, so treat as historical; the relative ordering is the durable part.</p>
   <div class="card">
     <div class="bars">
-      <div class="bar"><span class="lab">L0 · Plain Claude</span><div class="track"><div class="fill" style="width:94%;background:var(--bar)">4.70</div></div></div>
-      <div class="bar"><span class="lab">L1 · Generic skills</span><div class="track"><div class="fill" style="width:86.4%;background:var(--bar)">4.32</div></div></div>
-      <div class="bar"><span class="lab">L3 · Plugin + SG script</span><div class="track"><div class="fill" style="width:84.2%;background:var(--bar)">4.21</div></div></div>
-      <div class="bar"><span class="lab">L2 · Small-business plugin</span><div class="track"><div class="fill" style="width:73.8%;background:var(--bar)">3.69</div></div></div>
+      <div class="bar"><span class="lab">L0 · Plain Claude</span><div class="track"><div class="fill" style="width:94%;background:var(--bar);">4.70</div></div></div>
+      <div class="bar"><span class="lab">L1 · Generic skills</span><div class="track"><div class="fill" style="width:86.4%;background:var(--bar);">4.32</div></div></div>
+      <div class="bar"><span class="lab">L3 · Plugin + SG script</span><div class="track"><div class="fill" style="width:84.2%;background:var(--bar);">4.21</div></div></div>
+      <div class="bar"><span class="lab">L2 · Small-business plugin</span><div class="track"><div class="fill" style="width:73.8%;background:var(--bar);">3.69</div></div></div>
     </div>
-    <p style="font-size:12.5px;color:var(--sub);margin:8px 0 0"><b>Plain Claude won outright.</b> The purpose-built plugin (L2) came <b>last</b>: its US-shaped guides added friction without quality. Adding the SG guardrail script (L3) rescued the plugin a lot, but still couldn't beat plain Claude, because the script's value isn't tied to the plugin.</p>
+    <p style="font-size:var(--text-xs);color:var(--sub);margin:var(--s-2) 0 0;"><b>Plain Claude won outright.</b> The purpose-built plugin (L2) came <b>last</b>: its US-shaped guides added friction without quality. Adding the SG guardrail script (L3) rescued the plugin a lot, but still couldn't beat plain Claude, because the script's value isn't tied to the plugin.</p>
   </div>
 
   <h3>Score by workflow type</h3>
   <div class="scroll">
-  <table style="min-width:680px">
+  <table style="min-width:680px;">
     <thead><tr><th>Workflow</th><th>L0 plain</th><th>L1 generic</th><th>L2 plugin</th><th>L3 plugin + SG script</th></tr></thead>
     <tbody>
       <tr><td><b>Analysis</b>: cash-flow snapshot</td><td class="good">4.72</td><td>4.28</td><td class="weak">4.02</td><td>4.28</td></tr>
@@ -629,30 +655,30 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:12.5px;color:var(--sub)">Plain Claude (L0) was best in every category. <b>No contradiction with the safety rates above:</b> plain Claude is the strongest <i>engine</i> when the prompt already carries the rules (this quality test), but on a <i>naive</i> prompt it has no guardrail to stop a confident underpayment. Best engine ≠ safe unguarded; that's exactly why the SG script matters.</p>
+  <p style="font-size:var(--text-xs);color:var(--sub);">Plain Claude (L0) was best in every category. <b>No contradiction with the safety rates above:</b> plain Claude is the strongest <i>engine</i> when the prompt already carries the rules (this quality test), but on a <i>naive</i> prompt it has no guardrail to stop a confident underpayment. Best engine ≠ safe unguarded; that's exactly why the SG script matters.</p>
 
   <h3>So, do you need a "skill" or plugin?</h3>
   <div class="card">
-    <p style="margin-bottom:8px"><b>For an expert one-shot prompt:</b> no, plain Claude suffices.</p>
-    <p style="margin-bottom:8px"><b>For a non-expert SME:</b> yes, but for <i>behaviour</i>, not tax. A thin <b>SG guardrail</b> that bans invented precision and unauthorised commitments. The current model handles SG GST itself; the guardrail's job is to stop it fabricating forecast bands and over-promising to customers (both persisted on the re-run). Not the heavy US plugin, which fabricates bands the most. Cheap, high-leverage, available today on plain Claude.</p>
-    <p style="margin-bottom:0"><b>For the filed number:</b> still <b>buy Xero</b>. Guardrail-Claude is safe and near-exact, but Xero gives a <i>guaranteed</i> figure filed straight to IRAS, with the audit trail. Claude reasons; Xero files.</p>
+    <p style="margin-bottom:var(--s-2);"><b>For an expert one-shot prompt:</b> no, plain Claude suffices.</p>
+    <p style="margin-bottom:var(--s-2);"><b>For a non-expert SME:</b> yes, but for <i>behaviour</i>, not tax. A thin <b>SG guardrail</b> that bans invented precision and unauthorised commitments. The current model handles SG GST itself; the guardrail's job is to stop it fabricating forecast bands and over-promising to customers (both persisted on the re-run). Not the heavy US plugin, which fabricates bands the most. Cheap, high-leverage, available today on plain Claude.</p>
+    <p style="margin-bottom:0;"><b>For the filed number:</b> still <b>buy Xero</b>. Guardrail-Claude is safe and near-exact, but Xero gives a <i>guaranteed</i> figure filed straight to IRAS, with the audit trail. Claude reasons; Xero files.</p>
   </div>
 
   <div class="callout blue">
     <h3><span class="tag">evidence status</span> What's been run</h3>
-    <ol class="steps" style="max-width:840px">
+    <ol class="steps" style="max-width:840px;">
       <li><b>✓ Done: safety-rate benchmark (160 runs).</b> The rates above come from 10 free-form runs per setup × 2 GST personas, judged by an independent model. It replaced the single-run figure with a real rate, and exposed how badly structured prompting can flatter a model (primed 0% vs free-form 100%).</li>
       <li><b>✓ Done: SG-script config tested directly.</b> Plain Claude + the SG script (no plugin) was measured: 0% catastrophic, matching plugin+script, confirming the script, not the plugin, is the value.</li>
       <li><b>✓ Done: live Xero sandbox probe.</b> Connected the Xero connector to a live <b>Singapore</b> org: it returned <b>SGD + GST 9%</b> (plus reverse-charge @9%, Customer Accounting, import/IGDS rates) purely from the org config, and <b>USD + Canadian rates</b> from a Global org, proving the connector inherits the account, not a country. It pulled 68 invoices live and exposed <b>no filing endpoint</b>. Reasoning-over-MCP <i>quality</i> is still inferred from the non-MCP runs.</li>
       <li><b>✓ Done: July 2026 re-run on a newer model.</b> Re-ran the GST-safety, cash-flow and drafting rounds. Catastrophic GST error gone (0/13 unguarded); invented bands (plugin 4/4) and over-commitment (8/8) persisted; the SG guardrail still eliminated both (0/4). The knowledge gap closed; the behavioural gaps didn't.</li>
     </ol>
-    <p style="margin-bottom:0;font-size:12.5px;color:var(--sub)">Still directional: 1 GST workflow, 2 personas, lean re-run (n=4–13 per cell), worth widening to more archetypes (F&amp;B / retail / trades) and a field test on a real consented SME's live Xero. And <b>re-running per model release</b>, since the knowledge-gap results keep moving.</p>
+    <p style="margin-bottom:0;font-size:var(--text-xs);color:var(--sub);">Still directional: 1 GST workflow, 2 personas, lean re-run (n=4–13 per cell), worth widening to more archetypes (F&amp;B / retail / trades) and a field test on a real consented SME's live Xero. And <b>re-running per model release</b>, since the knowledge-gap results keep moving.</p>
   </div>
 
-  <h3 style="margin-top:34px">Coverage: what was tested vs reasoned</h3>
-  <p style="max-width:860px;font-size:13.5px;color:var(--sub)">Honesty check: I did <b>not</b> test every cell. This is the per-setup view of the four rounds in "What was tested" (tab ①): ✓ where measured, ◐ where reasoned / web-verified, ✗ where untested.</p>
+  <h3 style="margin-top:var(--s-8);">Coverage: what was tested vs reasoned</h3>
+  <p style="max-width:860px;font-size:var(--text-sm);color:var(--sub);">Honesty check: I did <b>not</b> test every cell. This is the per-setup view of the four rounds in "What was tested" (tab ①): ✓ where measured, ◐ where reasoned / web-verified, ✗ where untested.</p>
   <div class="scroll">
-  <table style="min-width:780px">
+  <table style="min-width:780px;">
     <thead><tr><th>Setup</th><th>Analysis</th><th>Drafting</th><th>Statutory</th><th>Safety rate<br><small>free-form</small></th><th>Live data (MCP)</th></tr></thead>
     <tbody>
       <tr><td class="rowlab">Plain Claude</td><td class="cell good">✓</td><td class="cell good">✓</td><td class="cell good">✓</td><td class="cell good">✓</td><td class="cell weak">✗</td></tr>
@@ -666,9 +692,9 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     </tbody>
   </table>
   </div>
-  <p style="font-size:11px;color:var(--mute)">✓ measured · – not run (*inferable from plugin+script, which it matched on statutory) · ◐ reasoned / web-verified · ✗ untested. The live-data (MCP) <b>connector layer is now measured</b> (SG org → SGD + GST 9%, live pull, no filing), and <b>free-form safety rates now span cash-flow, drafting &amp; statutory</b>. Remaining gap: reasoning-over-MCP quality (analysis/drafting via live data).</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);">✓ measured · – not run (*inferable from plugin+script, which it matched on statutory) · ◐ reasoned / web-verified · ✗ untested. The live-data (MCP) <b>connector layer is now measured</b> (SG org → SGD + GST 9%, live pull, no filing), and <b>free-form safety rates now span cash-flow, drafting &amp; statutory</b>. Remaining gap: reasoning-over-MCP quality (analysis/drafting via live data).</p>
 
-  <p style="font-size:11.5px;color:var(--mute);margin-top:16px"><b>Method &amp; caveats:</b> Directional, not exhaustive: 5 synthetic (PDPA-safe) personas, 3 of 8 planned workflows. Runs: <b>28</b> expert quality (round 1) + <b>160</b> GST safety-benchmark (round 2, free-form & primed) + <b>90</b> cash-flow/drafting safety (round 3) + <b>6</b> preliminary naive ≈ 280 (Jun). Plus a <b>July 2026 re-run</b> on a newer Sonnet (~37 runs: importer GST ×13, cash-flow ×12, drafting ×12); the Jun→Jul comparison across model versions is the point, not a like-for-like control. Generated by Claude Sonnet, judged by Claude Opus (never the same model grading its own output). The "+ MCP" cells are reasoned from the measured layers + web-verified connector capabilities, not separately live-run. Connector facts verified May–Jun 2026. <b>Plugin scope:</b> the small-business plugin has <b>31 skills</b>. I <i>ran</i> 3 (one per archetype) and <i>read</i> all 10 finance skills (0 contain GST/IRAS/CPF); its ~18 CRM/marketing/ops/contract/hiring skills were not evaluated.</p>
+  <p style="font-size:var(--text-xs);color:var(--mute);margin-top:var(--s-4);"><b>Method &amp; caveats:</b> Directional, not exhaustive: 5 synthetic (PDPA-safe) personas, 3 of 8 planned workflows. Runs: <b>28</b> expert quality (round 1) + <b>160</b> GST safety-benchmark (round 2, free-form & primed) + <b>90</b> cash-flow/drafting safety (round 3) + <b>6</b> preliminary naive ≈ 280 (Jun). Plus a <b>July 2026 re-run</b> on a newer Sonnet (~37 runs: importer GST ×13, cash-flow ×12, drafting ×12); the Jun→Jul comparison across model versions is the point, not a like-for-like control. Generated by Claude Sonnet, judged by Claude Opus (never the same model grading its own output). The "+ MCP" cells are reasoned from the measured layers + web-verified connector capabilities, not separately live-run. Connector facts verified May–Jun 2026. <b>Plugin scope:</b> the small-business plugin has <b>31 skills</b>. I <i>ran</i> 3 (one per archetype) and <i>read</i> all 10 finance skills (0 contain GST/IRAS/CPF); its ~18 CRM/marketing/ops/contract/hiring skills were not evaluated.</p>
 </section>
 
 <!-- ===================== TAB 4: SURFACES ===================== -->
@@ -677,9 +703,9 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
   <p class="lede">"Can Claude help with X?" depends on whether a connector (MCP) exists for the tool the SME uses, what that connector is allowed to do, and the CorpPass gate on government filing. Here's every surface a typical SG SME touches, the detail behind the <b>Data</b> layer in ② and the "+ MCP" column.</p>
 
   <div class="legend">
-    <span class="lg"><span class="dot" style="background:var(--good-bg);border:1px solid var(--good-ink)"></span> official connector</span>
-    <span class="lg"><span class="dot" style="background:var(--part-bg);border:1px solid var(--part-ink)"></span> community / third-party / partial</span>
-    <span class="lg"><span class="dot" style="background:var(--weak-bg);border:1px solid var(--weak-ink)"></span> no usable connector</span>
+    <span class="lg"><span class="dot" style="background:var(--good-bg);border:1px solid var(--good-ink);"></span> official connector</span>
+    <span class="lg"><span class="dot" style="background:var(--part-bg);border:1px solid var(--part-ink);"></span> community / third-party / partial</span>
+    <span class="lg"><span class="dot" style="background:var(--weak-bg);border:1px solid var(--weak-ink);"></span> no usable connector</span>
     <span class="lg"><span class="pkg">📦</span> bundled in the plugin</span>
   </div>
 
@@ -688,7 +714,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
     <thead><tr><th>Surface (what the SME does)</th><th>What SG SMEs use</th><th>Connector today?</th><th>What AI can do</th><th>Workaround now</th></tr></thead>
     <tbody>
       <tr><td class="rowlab">Accounting &amp; books</td><td>Xero (most common), QuickBooks, MYOB</td><td class="cell good"><span class="g">✓</span> Xero official · QBO sandbox <span class="pkg">📦 QBO</span></td><td class="cell">Read + post invoices, bills, ledger</td><td class="cell">Wire the Xero connector; reason in Claude</td></tr>
-      <tr><td class="rowlab" style="background:var(--weak-bg)">GST F5 filing</td><td>myTax Portal + CorpPass</td><td class="cell weak"><span class="g">✗</span> no IRAS connector</td><td class="cell">Prepare figures only, <b>can't file</b></td><td class="cell">Xero one-click (ASR+); or key into myTax; or tax agent</td></tr>
+      <tr><td class="rowlab" style="background:var(--weak-bg);">GST F5 filing</td><td>myTax Portal + CorpPass</td><td class="cell weak"><span class="g">✗</span> no IRAS connector</td><td class="cell">Prepare figures only, <b>can't file</b></td><td class="cell">Xero one-click (ASR+); or key into myTax; or tax agent</td></tr>
       <tr><td class="rowlab">Getting paid</td><td>PayNow · NETS · FAST (+ cards)</td><td class="cell weak"><span class="g">✗</span> rails none · Stripe/PayPal ✓ <span class="pkg">📦</span> · Square N/A in SG</td><td class="cell">Card/online payments &amp; refunds; not local rails</td><td class="cell">Local gateway (e.g. HitPay); reconcile in Xero</td></tr>
       <tr><td class="rowlab">Customer comms</td><td>WhatsApp Business (top channel, industry est.)</td><td class="cell part"><span class="g">~</span> no official Meta one · third-party wrappers <span class="pkg">📦 Slack/Gmail</span></td><td class="cell">Read chats, draft replies</td><td class="cell">Third-party wrapper, or paste thread → Claude</td></tr>
       <tr><td class="rowlab">Selling: marketplaces</td><td>Shopee · Lazada · Carousell</td><td class="cell weak"><span class="g">✗</span> no seller connector (scrapers only)</td><td class="cell">Read public listings only</td><td class="cell">Export seller-centre CSV → Claude</td></tr>
@@ -703,7 +729,7 @@ footer{max-width:1180px;margin:0 auto;padding:26px 22px 60px;color:var(--mute);f
 
   <div class="callout warn">
     <h3><span class="tag">the real gap</span> The surfaces that define an SG SME's day have no connector</h3>
-    <p style="margin-bottom:0">Getting paid (<b>PayNow/NETS</b>), talking to customers (<b>WhatsApp Business</b>), selling (<b>Shopee/Grab</b>) and filing (<b>IRAS</b>), the four things an SG SME does most, have <b>no usable AI connector today</b>, from the plugin or anywhere. The plugin bundles the office tools and US payment apps, which are the <i>least</i> SG-critical. An SG-shaped connector layer (IRAS, PayNow, WhatsApp Business, local POS/marketplaces) is the highest-leverage thing a programme could build.</p>
+    <p style="margin-bottom:0;">Getting paid (<b>PayNow/NETS</b>), talking to customers (<b>WhatsApp Business</b>), selling (<b>Shopee/Grab</b>) and filing (<b>IRAS</b>), the four things an SG SME does most, have <b>no usable AI connector today</b>, from the plugin or anywhere. The plugin bundles the office tools and US payment apps, which are the <i>least</i> SG-critical. An SG-shaped connector layer (IRAS, PayNow, WhatsApp Business, local POS/marketplaces) is the highest-leverage thing a programme could build.</p>
   </div>
 </section>
 
